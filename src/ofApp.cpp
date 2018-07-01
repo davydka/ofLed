@@ -9,9 +9,9 @@ void ofApp::setup() {
 
 	// SYSTEM SETTINGS
 	//--------------------------------------
-	stripWidth = 12;                            // pixel width of strip
-	stripHeight = 96;                            // pixel height of strip
-	rowHeight = 12;
+	stripWidth = 16;                            // pixel width of strip
+	stripHeight = 128;                            // pixel height of strip
+	rowHeight = 16;
 	stripsPerPort = 1;                          // total number of strips per port
 	numPorts = 1;                               // total number of teensy ports?
 	brightness = 20;                             // LED brightness
@@ -27,7 +27,8 @@ void ofApp::setup() {
 
 	/* Configure our teensy boards (portName, xOffset, yOffset, width%, height%, direction) */
 	//teensy.serialConfigure("cu.usbmodem2809741", 0, 0, 100, 100, 0);
-	teensy.serialConfigure("cu.usbmodem2733511", 0, 0, 100, 100, 0);
+	//teensy.serialConfigure("cu.usbmodem2733511", 0, 0, 100, 100, 0);
+	teensy.serialConfigure("ttyACM0", 0, 0, 100, 100, 0);
 	teensy.setBrightness(brightness);
 
 
@@ -86,12 +87,12 @@ void ofApp::updateFbo(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	teensy.draw(120,300);
+	teensy.draw(0,0);
 
 	ofSetColor(255);
-	ofDrawBitmapString("// Controls //", ofGetWidth()-250, 20);
-	ofDrawBitmapString("Brightness (up/down) == " + ofToString(brightness), ofGetWidth()-250, 80);
-	ofDrawBitmapString("Images # == " + ofToString(dirImg.size()), ofGetWidth()-250, 140);
+	// ofDrawBitmapString("// Controls //", ofGetWidth()-250, 20);
+	// ofDrawBitmapString("Brightness (up/down) == " + ofToString(brightness), ofGetWidth()-250, 80);
+	// ofDrawBitmapString("Images # == " + ofToString(dirImg.size()), ofGetWidth()-250, 140);
 }
 
 void ofApp::drawPong(){
