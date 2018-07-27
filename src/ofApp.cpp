@@ -14,7 +14,7 @@ void ofApp::setup() {
 	rowHeight = 16;
 	stripsPerPort = 1;                          // total number of strips per port
 	numPorts = 1;                               // total number of teensy ports?
-	brightness = 20;                             // LED brightness
+	brightness = 255;                             // LED brightness
 
 
 	drawModes = 0;                              // default mode
@@ -52,7 +52,7 @@ void ofApp::exit(){
 //--------------------------------------------------------------
 void ofApp::update(){
 	//ofSetWindowTitle("TeensyOctoExample - "+ofToString(ofGetFrameRate()));
-	ballpos+=dir*1.0f;
+	ballpos+=dir*0.5f;
 
 	updateFbo();                                // update our Fbo functions
 	teensy.update();                            // update our serial to teensy stuff
