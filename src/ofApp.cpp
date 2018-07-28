@@ -4,7 +4,7 @@
 void ofApp::setup() {
 	ofBackground(0, 0, 0);                      // default background to black / LEDs off
 	ofDisableAntiAliasing();                    // we need our graphics sharp for the LEDs
-	ofSetVerticalSync(false);
+	ofSetVerticalSync(true);
 	ofSetFrameRate(60);
 
 	// SYSTEM SETTINGS
@@ -15,8 +15,6 @@ void ofApp::setup() {
 	stripsPerPort = 1;                          // total number of strips per port
 	numPorts = 1;                               // total number of teensy ports?
 	brightness = 255;                             // LED brightness
-
-	drawModes = 0;                              // default mode
 
 	rectWidth = 1;
 	dir = 1;
@@ -37,38 +35,8 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	ballpos+=dir*1.0f;
+	ballpos+=dir*0.05f;
 
-	updateFbo();                                // update our Fbo functions
-	teensy.update();                            // update our serial to teensy stuff
-}
-
-//--------------------------------------------------------------
-void ofApp::updateFbo(){
-	fbo.begin();                                // begins the fbo
-	ofClear(0,0,0);                             // refreshes fbo, removes artifacts
-
-	//ofSetColor(brightness);
-	ofSetColor(255);
-
-	ofPushStyle();
-	drawPong();
-	ofPopStyle();
-
-	fbo.end();                                  // closes the fbo
-
-	fbo.readToPixels(teensy.pixels1);           // send fbo pixels to teensy
-}
-
-//--------------------------------------------------------------
-void ofApp::draw(){
-	teensy.draw(0,0);
-	// fbo.draw(0, 0);
-
-	ofSetColor(255);
-}
-
-void ofApp::drawPong(){
 	if(ballpos > stripWidth-rectWidth) {
 		ballpos = stripWidth-rectWidth;
 		dir = -1;
@@ -77,31 +45,25 @@ void ofApp::drawPong(){
 		ballpos = 0;
 		dir = 1;
 	}
+
+	teensy.update();                            // update our serial to teensy stuff
+}
+
+//--------------------------------------------------------------
+void ofApp::draw(){
+	fbo.begin();
+	ofClear(0,0,0);                             // refreshes fbo, removes artifacts
 	ofSetColor(255, 0, 255);
 	ofDrawRectangle(ballpos,0,rectWidth,stripHeight*stripsPerPort*numPorts);
+
+	fbo.end();
+
+	fbo.readToPixels(teensy.pixels1);           // send fbo pixels to teensy
+	//fbo.draw(0, 0);
+	teensy.draw(32,32);
+
+	ofSetColor(255);
 }
-
-//--------------------------------------------------------------
-void ofApp::keyReleased(int key){
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){}
-
-//--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){}
-
-//--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){}
-
-//--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){}
 
 //--------------------------------------------------------------
 void ofApp::gotMessage(ofMessage msg){}
-
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){}
