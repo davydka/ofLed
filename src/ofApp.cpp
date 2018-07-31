@@ -35,16 +35,15 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	ballpos+=dir*0.05f;
+	//ms= ofMap(sin(ofGetSystemTime())/1000, -1, 1, 0, stripWidth-rectWidth);
+	// cout << ms << endl;
 
-	if(ballpos > stripWidth-rectWidth) {
-		ballpos = stripWidth-rectWidth;
-		dir = -1;
-	}
-	else if(ballpos < 0) {
-		ballpos = 0;
-		dir = 1;
-	}
+	//float h = ofToFloat(ofGetTimestampString("%H")) * 60 * 60;
+	// float m = ofToFloat(ofGetTimestampString("%M")) * 60;
+	float s = ofToFloat(ofGetTimestampString("%S"));
+	float i = ofToFloat(ofGetTimestampString("%i"));
+	float time = s + i;
+	ballpos = ofMap(time, 0, 1000, 0, stripWidth-rectWidth);
 
 	teensy.update();                            // update our serial to teensy stuff
 }
