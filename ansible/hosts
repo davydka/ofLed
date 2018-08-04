@@ -1,0 +1,4 @@
+pifull1.local ansible_user=pi
+pifull2.local ansible_user=pi
+pifull3.local ansible_user=pi
+pifull4.local ansible_user=pi
