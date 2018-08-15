@@ -26,7 +26,6 @@ class ofApp : public ofBaseApp{
 
 		// Graphic functions
 		//-----------------------------
-		int rectWidth;
-		float ballpos;
-		int dir;
+		void star(float x, float y, float z, float w);
+		vector <ofVec4f> stars;
 };

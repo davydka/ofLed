@@ -4,7 +4,7 @@
 void ofApp::setup() {
 	ofBackground(0, 0, 0);                      // default background to black / LEDs off
 	ofDisableAntiAliasing();                    // we need our graphics sharp for the LEDs
-	ofSetVerticalSync(true);
+	ofSetVerticalSync(false);
 	ofSetFrameRate(60);
 
 	// SYSTEM SETTINGS
@@ -15,9 +15,6 @@ void ofApp::setup() {
 	stripsPerPort = 1;                          // total number of strips per port
 	numPorts = 1;                               // total number of teensy ports?
 	brightness = 255;                             // LED brightness
-
-	rectWidth = 1;
-	dir = 1;
 
 	// setup our teensys
 	teensy.setup(stripWidth, stripHeight, rowHeight, stripsPerPort, numPorts);
@@ -31,19 +28,29 @@ void ofApp::setup() {
 
 	// allocate our pixels, fbo, and texture
 	fbo.allocate(stripWidth, stripHeight*stripsPerPort*numPorts, GL_RGB);
+
+	stars.resize(80);
+	for(int i=0; i < stars.size(); i++) {
+		stars[i].x = ofRandom(-stripWidth, stripWidth);
+		stars[i].y = ofRandom(-rowHeight, rowHeight);
+		stars[i].z = ofRandom(0, stripWidth);
+		stars[i].w = stars[i].z;
+	}
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	//ms= ofMap(sin(ofGetSystemTime())/1000, -1, 1, 0, stripWidth-rectWidth);
-	// cout << ms << endl;
+	for(int i=0; i < stars.size(); i++) {
+		stars[i].z = stars[i].z - .5;
+		stars[i].w = stars[i].z;
 
-	//float h = ofToFloat(ofGetTimestampString("%H")) * 60 * 60;
-	// float m = ofToFloat(ofGetTimestampString("%M")) * 60;
-	float s = ofToFloat(ofGetTimestampString("%S"));
-	float i = ofToFloat(ofGetTimestampString("%i"));
-	float time = s + i;
-	ballpos = ofMap(time, 0, 1000, 0, stripWidth-rectWidth);
+		if(stars[i].z < 1) {
+			stars[i].x = ofRandom(-stripWidth, stripWidth);
+			stars[i].y = ofRandom(-rowHeight, rowHeight);
+			stars[i].z = ofRandom(0, stripWidth);
+			stars[i].w = stars[i].z;
+		}
+	}
 
 	teensy.update();                            // update our serial to teensy stuff
 }
@@ -52,16 +59,29 @@ void ofApp::update(){
 void ofApp::draw(){
 	fbo.begin();
 	ofClear(0,0,0);                             // refreshes fbo, removes artifacts
-	ofSetColor(255, 0, 255);
-	ofDrawRectangle(ballpos,0,rectWidth,stripHeight*stripsPerPort*numPorts);
+	ofSetColor(255);
 
+	ofPushMatrix();
+	ofTranslate( stripWidth / 2.f, rowHeight / 2.f );
+	for(int i=0; i < stars.size(); i++) {
+		star(stars[i].x, stars[i].y, stars[i].z, stars[i].w);
+	}
+	ofPopMatrix();
 	fbo.end();
 
 	fbo.readToPixels(teensy.pixels1);           // send fbo pixels to teensy
-	//fbo.draw(0, 0);
+	// fbo.draw(0, 0);
 	teensy.draw(32,32);
+}
 
-	ofSetColor(255);
+void ofApp::star(float x, float y, float z, float w) {
+	ofSetColor(255,130,0);
+	ofFill();
+
+	float sx = ofMap(x / z, 0, 1, 0, stripWidth);
+	float sy = ofMap(y / z, 0, 1, 0, rowHeight);
+	float r = ofMap(z, 0, ofGetWidth(), 2, 0);
+	ofDrawCircle(sx, sy, r);
 }
 
 //--------------------------------------------------------------
