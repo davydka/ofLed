@@ -12,3 +12,5 @@
 * `cd pgmManager`
 * `npm install` (maybe `npm install --python=python2.7`)
 * `npm run start`
+* todo: `qmidinet -g`
+* todo: `1 'QmidiNet 128:0'`
