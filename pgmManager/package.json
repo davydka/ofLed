@@ -1,0 +1,14 @@
+{
+  "name": "program_manager",
+  "version": "1.0.0",
+  "description": "Listens to midi pgm changes and starts/stops OF apps.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "David Whitely",
+  "license": "ISC",
+  "dependencies": {
+    "midi": "^0.9.5"
+  }
+}
