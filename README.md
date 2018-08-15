@@ -11,3 +11,4 @@
 
 * `cd pgmManager`
 * `npm install` (maybe `npm install --python=python2.7`)
+* `npm run start`
