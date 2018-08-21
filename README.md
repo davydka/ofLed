@@ -14,3 +14,4 @@
 * `npm run start`
 * todo: `qmidinet -g`
 * todo: `1 'QmidiNet 128:0'`
+* other todo: `/sendmidi/sendmidi-rpi-jessie dev "port 0" cc 20 5`
