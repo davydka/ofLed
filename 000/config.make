@@ -61,8 +61,7 @@
 #
 #   Note: Leave a leading space when adding list items with the += operator
 ################################################################################
-PROJECT_EXCLUSIONS = $(PROJECT_ROOT)/pgmManager%
-PROJECT_EXCLUSIONS += $(PROJECT_ROOT)/000%
+#PROJECT_EXCLUSIONS = $(PROJECT_ROOT)/pgmManager%
 
 ################################################################################
 # PROJECT LINKER FLAGS

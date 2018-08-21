@@ -1,0 +1,8 @@
+bin/*
+!bin/data/
+
+obj/*
+.idea/*
+.DS_Store
+
+node_modules
