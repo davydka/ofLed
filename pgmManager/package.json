@@ -9,6 +9,7 @@
   "author": "David Whitely",
   "license": "ISC",
   "dependencies": {
-    "midi": "^0.9.5"
+    "midi": "^0.9.5",
+    "pm2": "^3.0.3"
   }
 }
