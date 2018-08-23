@@ -11,6 +11,15 @@ const {
 const apps = [];
 
 apps.push({
+	name: 'ofLed',
+	script: '../bin/ofLed',
+	watch: false,
+	interpreter: 'none',
+	args: '',
+	autorestart: true
+});
+
+apps.push({
 	name: 'qmidinet',
 	script: 'qmidinet',
 	watch: false,
