@@ -14,10 +14,14 @@ console.log('pifull #:', INDEX);
 // Set up a new input.
 const input = new midi.input();
 
+let openIndex = 1;
 for ( let i = 0; i < input.getPortCount(); i += 1 ) {
+  if(input.getPortName(i) == 'QmidiNet 128:0') {
+	  openIndex = i;
+  }
   console.log(i, input.getPortName(i));
 }
-input.openPort(1); //QmidiNet 128:0
+input.openPort(openIndex); //QmidiNet 128:0
 
 // Configure a callback.
 input.on('message', function(deltaTime, message) {

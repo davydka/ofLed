@@ -28,6 +28,14 @@ apps.push({
 	autorestart: true
 });
 
+apps.push({
+	name: 'pgmManager',
+	script: './index.js',
+	watch: false,
+	args: '',
+	autorestart: true
+});
+
 if(INDEX === '0') {
 	apps.push({
 		name: 'midish',
