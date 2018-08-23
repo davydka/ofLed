@@ -8,7 +8,7 @@ if (config.error) {
 const {
 	INDEX
 } = process.env;
-console.log('pifull #:', INDEX);
+console.log(INDEX);
 
 
 // Set up a new input.

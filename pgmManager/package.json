@@ -9,6 +9,7 @@
   "author": "David Whitely",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^6.0.0",
     "midi": "^0.9.5",
     "pm2": "^3.0.3"
   }

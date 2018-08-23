@@ -9,21 +9,20 @@
 
 ---
 
-* `cd pgmManager`
 * `npm install` (maybe `npm install --python=python2.7`)
-* `npm run start`
-* todo: `qmidinet -g`
-* todo: `1 'QmidiNet 128:0'`
-* other todo: `/sendmidi/sendmidi-rpi-jessie dev "port 0" cc 20 5`
+* note: `/sendmidi/sendmidi-rpi-jessie dev "port 0" cc 20 5`
 
 ---
 
 * `cd of/apps/Sites/ofLed/pgmManager/`
+* `cp .env.sample .env`
 * `npm install`
 * `npm install -g pm2`
+* `pm2 install pm2-logrotate@2.6.0`
+* pifull0: `sudo apt install midish`
+* pifull0: `vim ~/.midish`
 * `sudo vim /etc/systemd/system/pifull.service`
 * `sudo systemctl daemon-reload`
-* `npm install -g pm2`
 * `sudo systemctl enable pifull.service`
 * `sudo systemctl start pifull.service`
 * reboot and check qmidinet is running: `pidof qmidinet`
@@ -32,6 +31,7 @@
 ```
 [Unit]
 Description=pifull pm2 services
+Wants=network-online.target
 After=network.target network-online.target
 
 [Service]
@@ -44,4 +44,17 @@ User=pi
 
 [Install]
 WantedBy=multi-user.target
+```
+
+```
+dnew 0 "Midi Through" rw
+dnew 1 "mio" rw
+dnew 2 "QmidiNet" rw
+
+# define filter "devicemap"
+fnew devicemap
+#route device 1 -> device 2
+fmap {any 1} {any 2}
+
+i #important: run midish in idle mode, run this routing
 ```
