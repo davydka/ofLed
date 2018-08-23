@@ -17,7 +17,7 @@ const input = new midi.input();
 for ( let i = 0; i < input.getPortCount(); i += 1 ) {
   console.log(i, input.getPortName(i));
 }
-input.openPort(0);
+input.openPort(1); //QmidiNet 128:0
 
 // Configure a callback.
 input.on('message', function(deltaTime, message) {
