@@ -15,7 +15,7 @@ const {
 let currentPgm = fs.readFileSync('PGM').toString();
 let restart = fs.readFileSync('RESTART').toString();
 
-if(restart == 0) {
+if(restart == 0 && INDEX == 0) {
   console.log('restart');
   setTimeout(function() {
     fs.writeFileSync('RESTART', 1);
@@ -39,11 +39,6 @@ easymidi.getInputs().forEach(function(inputName){
 });
 
 function handlePgm(pgm) {
-  if(INDEX == 0) {
-    // console.log('restart midish');
-    // pm2.restart('midish');
-  }
-
   if(pgm === currentPgm) {
     console.log('samesies');
     return;
@@ -74,7 +69,11 @@ function handlePgm(pgm) {
       if (item.name.match(/^\d/) && item.name != startProcess) {
         console.log(item.name);
         if(item.pm2_env.status === 'online') {
-          pm2.stop(item.name);
+          pm2.stop(item.name, function(err) {
+            if(err) {
+              console.log(err);
+            }
+          });
         }
       }
     });
