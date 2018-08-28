@@ -31,6 +31,10 @@ easymidi.getInputs().forEach(function(inputName){
 });
 
 function handlePgm(pgm) {
+  if(INDEX == 0) {
+    pm2.restart('midish');
+  }
+
   if(pgm === currentPgm) {
     console.log('samesies');
     return;
@@ -38,21 +42,45 @@ function handlePgm(pgm) {
   console.log(currentPgm);
 
   let startProcess = pgm.toString().padStart(3, '0');
+  /*
   let stopProcess = "ofLed";
   if(currentPgm.toString().indexOf("ofLed") == -1) {
     console.log("setting to soemthing");
     stopProcess = currentPgm.toString().padStart(3, '0');
   }
+  */
 
-  currentPgm = pgm;
+  //currentPgm = pgm;
   fs.writeFileSync('PGM', pgm);
 
+  /*
   pm2.stop(stopProcess, function(err) {
     if(err) {
       // console.log(err);
     }
 
     console.log('stopped');
+  });
+  */
+
+  pm2.list(function(err, items) {
+    if(err){
+      console.log(err);
+    }
+
+    items.map((item) => {
+      if(item.name === 'ofLed') {
+        if(item.pm2_env.status === 'online') {
+          pm2.stop('ofLed');
+        }
+      }
+
+      if (item.name.match(/^\d/) && item.name != startProcess) {
+        if(item.pm2_env.status === 'online') {
+          pm2.stop(item.name);
+        }
+      }
+    });
   });
 
   pm2.start({
