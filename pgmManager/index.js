@@ -13,7 +13,15 @@ const {
 // console.log('pifull #:', INDEX);
 
 let currentPgm = fs.readFileSync('PGM').toString();
+let restart = fs.readFileSync('RESTART').toString();
 
+if(restart == 0) {
+  console.log('restart');
+  setTimeout(function() {
+    fs.writeFileSync('RESTART', 1);
+    pm2.restart('midish');
+  }, 5000);
+}
 
 easymidi.getInputs().forEach(function(inputName){
   var input = new easymidi.Input(inputName);
@@ -32,36 +40,20 @@ easymidi.getInputs().forEach(function(inputName){
 
 function handlePgm(pgm) {
   if(INDEX == 0) {
-    pm2.restart('midish');
+    // console.log('restart midish');
+    // pm2.restart('midish');
   }
 
   if(pgm === currentPgm) {
     console.log('samesies');
     return;
   }
-  console.log(currentPgm);
 
   let startProcess = pgm.toString().padStart(3, '0');
-  /*
-  let stopProcess = "ofLed";
-  if(currentPgm.toString().indexOf("ofLed") == -1) {
-    console.log("setting to soemthing");
-    stopProcess = currentPgm.toString().padStart(3, '0');
-  }
-  */
 
   //currentPgm = pgm;
   fs.writeFileSync('PGM', pgm);
 
-  /*
-  pm2.stop(stopProcess, function(err) {
-    if(err) {
-      // console.log(err);
-    }
-
-    console.log('stopped');
-  });
-  */
 
   pm2.list(function(err, items) {
     if(err){
@@ -71,11 +63,16 @@ function handlePgm(pgm) {
     items.map((item) => {
       if(item.name === 'ofLed') {
         if(item.pm2_env.status === 'online') {
-          pm2.stop('ofLed');
+          pm2.stop('ofLed', function(err) {
+            if(err) {
+              console.log(err);
+            }
+          });
         }
       }
 
       if (item.name.match(/^\d/) && item.name != startProcess) {
+        console.log(item.name);
         if(item.pm2_env.status === 'online') {
           pm2.stop(item.name);
         }
