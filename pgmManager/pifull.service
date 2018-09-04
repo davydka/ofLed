@@ -1,0 +1,16 @@
+[Unit]
+Description=pifull pm2 services
+Wants=network-online.target
+After=network.target network-online.target
+
+[Service]
+Type=forking
+ExecStart=/home/pi/.npm-global/bin/pm2 start ecosystem.config.js
+WorkingDirectory=/home/pi/of/apps/Sites/ofLed/pgmManager
+StandardOutput=inherit
+StandardError=inherit
+User=pi
+
+[Install]
+WantedBy=multi-user.target
+
