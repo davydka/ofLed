@@ -1,7 +1,5 @@
 #include "ofApp.h"
 
-int counter = 0;
-
 //--------------------------------------------------------------
 void ofApp::setup() {
   ofBackground(0, 0, 0);                      // default background to black / LEDs off
@@ -46,8 +44,6 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update(){
-  counter++;
-  ofSetWindowPosition(counter, 0);
   for(int i=0; i < stars.size(); i++) {
     stars[i].z = stars[i].z - .5;
     stars[i].w = stars[i].z;
