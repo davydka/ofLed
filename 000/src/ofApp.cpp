@@ -86,4 +86,8 @@ void ofApp::star(float x, float y, float z, float w) {
 }
 
 //--------------------------------------------------------------
+void ofApp::newMidiMessage(ofxMidiMessage& msg) {
+}
+
+//--------------------------------------------------------------
 void ofApp::gotMessage(ofMessage msg){}
