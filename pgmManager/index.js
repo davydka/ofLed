@@ -36,6 +36,19 @@ easymidi.getInputs().forEach(function(inputName){
     }
 
   });
+
+  // listening for Channel 5, NoteOn from Synthstrom (can't send pgmOut)
+  input.on('noteon', function (msg) {
+
+    // 0 index midi channels, so channel 5 on device is channel 4 here
+    if(msg.channel === 5) {
+      handlePgm(msg.number);
+    }
+    else {
+      console.log(msg);
+    }
+
+  });
 });
 
 function handlePgm(pgm) {
