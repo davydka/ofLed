@@ -4,17 +4,19 @@
 #include "ofMain.h"
 #include "ofxMidi.h"
 
-class ofApp : public ofBaseApp{
+class ofApp : public ofBaseApp, public ofxMidiListener {
 
   public:
     void setup();
     void update();
     void draw();
+    void exit();
     void gotMessage(ofMessage msg);
 
     // MIDI stuff
     ofxMidiIn midiIn;
     void newMidiMessage(ofxMidiMessage& eventArgs);
+    void handleNote(int note);
     std::vector<ofxMidiMessage> midiMessages;
     std::size_t maxMessages = 10; // messages to keep track of
 
@@ -33,6 +35,6 @@ class ofApp : public ofBaseApp{
 
     // Graphic functions
     //-----------------------------
-    void star(float x, float y, float z, float w);
-    vector <ofVec4f> stars;
+    void star(float x, float y, float z);
+    vector <ofVec3f> stars;
 };

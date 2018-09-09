@@ -1,5 +1,8 @@
 #include "ofApp.h"
 
+string INDEX;
+string MIDIPORT;
+
 //--------------------------------------------------------------
 void ofApp::setup() {
   ofBackground(0, 0, 0);                      // default background to black / LEDs off
@@ -9,6 +12,18 @@ void ofApp::setup() {
   ofSetWindowPosition(0, 0);
 
   // SYSTEM SETTINGS
+  INDEX = ofGetEnv("INDEX");
+  MIDIPORT = ofGetEnv("MIDIPORT");
+  cout << "pifull INDEX: " << INDEX << endl;
+  cout << "MIDIPORT: " << MIDIPORT << endl;
+
+  midiIn.listInPorts();
+  if( MIDIPORT != "none") {
+    midiIn.openPort(MIDIPORT);
+    midiIn.addListener(this);
+  }
+
+  // Teensy SYSTEM SETTINGS
   //--------------------------------------
   stripWidth = 16;                            // pixel width of strip
   stripHeight = 128;                            // pixel height of strip
@@ -27,15 +42,15 @@ void ofApp::setup() {
   teensy.setBrightness(brightness);
 
 
-  // allocate our pixels, fbo, and texture
+  // allocate our ofxTeensyOcto pixels, fbo, and texture
   fbo.allocate(stripWidth, stripHeight*stripsPerPort*numPorts, GL_RGB);
 
+  // ANIMATION SETTINGS
   stars.resize(80);
   for(int i=0; i < stars.size(); i++) {
     stars[i].x = ofRandom(-stripWidth, stripWidth);
     stars[i].y = ofRandom(-rowHeight, rowHeight);
     stars[i].z = ofRandom(0, stripWidth);
-    stars[i].w = stars[i].z;
   }
 }
 
@@ -43,13 +58,11 @@ void ofApp::setup() {
 void ofApp::update(){
   for(int i=0; i < stars.size(); i++) {
     stars[i].z = stars[i].z - .5;
-    stars[i].w = stars[i].z;
 
     if(stars[i].z < 1) {
       stars[i].x = ofRandom(-stripWidth, stripWidth);
       stars[i].y = ofRandom(-rowHeight, rowHeight);
       stars[i].z = ofRandom(0, stripWidth);
-      stars[i].w = stars[i].z;
     }
   }
 
@@ -63,9 +76,10 @@ void ofApp::draw(){
   ofSetColor(255);
 
   ofPushMatrix();
-  ofTranslate( stripWidth / 2.f, rowHeight / 2.f );
+  // ofTranslate( stripWidth / 2.f, rowHeight / 2.f );
+  ofTranslate( 2, 16 );
   for(int i=0; i < stars.size(); i++) {
-    star(stars[i].x, stars[i].y, stars[i].z, stars[i].w);
+    star(stars[i].x, stars[i].y, stars[i].z);
   }
   ofPopMatrix();
   fbo.end();
@@ -75,8 +89,8 @@ void ofApp::draw(){
   teensy.draw(32,32);
 }
 
-void ofApp::star(float x, float y, float z, float w) {
-  ofSetColor(0,130,255);
+void ofApp::star(float x, float y, float z) {
+  ofSetColor(250,223,127);
   ofFill();
 
   float sx = ofMap(x / z, 0, 1, 0, stripWidth);
@@ -87,6 +101,29 @@ void ofApp::star(float x, float y, float z, float w) {
 
 //--------------------------------------------------------------
 void ofApp::newMidiMessage(ofxMidiMessage& msg) {
+  if( msg.channel != 6 ) {
+    return;
+  }
+  if( msg.status == MIDI_NOTE_ON && msg.velocity > 0 ) {
+    handleNote(msg.pitch);
+  }
+  if( msg.status == MIDI_CONTROL_CHANGE ) {
+    // cout << msg.control << endl;
+    // cout << msg.value << endl;
+  }
+}
+
+//--------------------------------------------------------------
+void ofApp::handleNote(int note) {
+  cout << note << endl;
+}
+
+//--------------------------------------------------------------
+void ofApp::exit() {
+  if( MIDIPORT != "none") {
+    midiIn.closePort();
+    midiIn.removeListener(this);
+  }
 }
 
 //--------------------------------------------------------------
