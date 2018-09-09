@@ -1,4 +1,4 @@
-TODO: ditch midish and use node easymidi for routing, currently using midish on pifull0 and basic node routing on pifulls1-4
+## TODO: ditch midish and use node easymidi for routing, currently using midish on pifull0 and basic node routing on pifulls1-4
 
 
 * addon -> https://github.com/davydka/ofxTeensyOcto
