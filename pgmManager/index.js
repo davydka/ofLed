@@ -41,8 +41,8 @@ easymidi.getInputs().forEach(function(inputName){
   input.on('noteon', function (msg) {
 
     // 0 index midi channels, so channel 5 on device is channel 4 here
-    if(msg.channel === 5) {
-      handlePgm(msg.number);
+    if(msg.channel === 4) {
+      handlePgm(msg.note);
     }
     else {
       console.log(msg);
