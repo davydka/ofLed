@@ -62,7 +62,7 @@ void ofApp::setup() {
 //--------------------------------------------------------------
 void ofApp::update(){
   for(int i=0; i < stars.size(); i++) {
-    stars[i].z = stars[i].z - .5;
+    stars[i].z = stars[i].z - .1;
 
     if(stars[i].z < 1) {
       stars[i].x = ofRandom(-stripWidth, stripWidth);
