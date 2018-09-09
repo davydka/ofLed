@@ -36,10 +36,23 @@ easymidi.getInputs().forEach(function(inputName){
     }
 
   });
+
+  // listening for Channel 5, NoteOn from Synthstrom (can't send pgmOut)
+  input.on('noteon', function (msg) {
+
+    // 0 index midi channels, so channel 5 on device is channel 4 here
+    if(msg.channel === 4 && msg.velocity > 0) {
+      handlePgm(msg.note);
+    }
+    else {
+      console.log(msg);
+    }
+
+  });
 });
 
 function handlePgm(pgm) {
-  if(pgm === currentPgm) {
+  if(pgm == currentPgm) {
     console.log('samesies');
     return;
   }
@@ -90,5 +103,6 @@ function handlePgm(pgm) {
     if(err) {
       console.log(err);
     }
+    currentPgm = pgm;
   });
 }
