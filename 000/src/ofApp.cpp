@@ -90,7 +90,7 @@ void ofApp::draw(){
 }
 
 void ofApp::star(float x, float y, float z) {
-  ofSetColor(250,223,127);
+  ofSetColor(255,220,55);
   ofFill();
 
   float sx = ofMap(x / z, 0, 1, 0, stripWidth);
