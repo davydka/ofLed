@@ -23,7 +23,13 @@ if(restart == 0 && INDEX == 0) {
   }, 5000);
 }
 
+const vMidi = new easymidi.Output('virtual midi', true);
+
 easymidi.getInputs().forEach(function(inputName){
+  if(inputName.indexOf('RtMidi') > -1) {
+    return;
+  }
+  console.log(inputName);
   var input = new easymidi.Input(inputName);
   input.on('program', function (msg) {
 
@@ -39,10 +45,18 @@ easymidi.getInputs().forEach(function(inputName){
 
   // listening for Channel 5, NoteOn from Synthstrom (can't send pgmOut)
   input.on('noteon', function (msg) {
+    console.log(msg);
 
     // 0 index midi channels, so channel 5 on device is channel 4 here
     if(msg.channel === 4 && msg.velocity > 0) {
       handlePgm(msg.note);
+    }
+    if(msg.channel === 5 && msg.velocity > 0) { // send notes on channel 6 to OFX
+      vMidi.send('noteon', {
+        note: msg.note,
+        velocity: 127,
+        channel: 5
+      });
     }
     else {
       console.log(msg);

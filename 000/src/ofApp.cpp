@@ -21,8 +21,13 @@ void ofApp::setup() {
 
   midiIn.listInPorts();
   if( MIDIPORT != "none") {
-    midiIn.openPort(MIDIPORT);
-    midiIn.addListener(this);
+    for( int i = 0; i < midiIn.getNumInPorts(); i++ ) {
+      if( ofIsStringInString(midiIn.getInPortName(i), MIDIPORT) ) {
+        midiIn.openPort(i);
+        midiIn.addListener(this);
+      }
+      // cout << midiIn.getInPortName(i) << endl;
+    }
   }
 
   if( INDEX != "0" && INDEX != "1" ) {
