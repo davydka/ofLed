@@ -2,6 +2,7 @@
 
 string INDEX;
 string MIDIPORT;
+int rot = 0;
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -21,6 +22,10 @@ void ofApp::setup() {
   if( MIDIPORT != "none") {
     midiIn.openPort(MIDIPORT);
     midiIn.addListener(this);
+  }
+
+  if( INDEX != "0" && INDEX != "1" ) {
+    rot = 270;
   }
 
   // Teensy SYSTEM SETTINGS
@@ -76,11 +81,17 @@ void ofApp::draw(){
   ofSetColor(255);
 
   ofPushMatrix();
+  ofTranslate(8, 8);
+  ofRotateZDeg(rot);
+  ofTranslate(-8, -8);
+
+  ofPushMatrix();
   // ofTranslate( stripWidth / 2.f, rowHeight / 2.f );
   ofTranslate( 2, 16 );
   for(int i=0; i < stars.size(); i++) {
     star(stars[i].x, stars[i].y, stars[i].z);
   }
+  ofPopMatrix();
   ofPopMatrix();
   fbo.end();
 
