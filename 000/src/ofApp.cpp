@@ -3,6 +3,7 @@
 string INDEX;
 string MIDIPORT;
 int rot = 0;
+int cNote = 0; // current note
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -41,7 +42,6 @@ void ofApp::setup() {
   teensy.setup(stripWidth, stripHeight, rowHeight, stripsPerPort, numPorts);
 
   /* Configure our teensy boards (portName, xOffset, yOffset, width%, height%, direction) */
-  //teensy.serialConfigure("cu.usbmodem2809741", 0, 0, 100, 100, 0);
   //teensy.serialConfigure("cu.usbmodem2733511", 0, 0, 100, 100, 0);
   teensy.serialConfigure("ttyACM0", 0, 0, 100, 100, 0);
   teensy.setBrightness(brightness);
@@ -61,13 +61,15 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update(){
-  for(int i=0; i < stars.size(); i++) {
-    stars[i].z = stars[i].z - .1;
+  if( cNote == 0) {
+    for(int i=0; i < stars.size(); i++) {
+      stars[i].z = stars[i].z - .1;
 
-    if(stars[i].z < 1) {
-      stars[i].x = ofRandom(-stripWidth, stripWidth);
-      stars[i].y = ofRandom(-rowHeight, rowHeight);
-      stars[i].z = ofRandom(0, stripWidth);
+      if(stars[i].z < 1) {
+        stars[i].x = ofRandom(-stripWidth, stripWidth);
+        stars[i].y = ofRandom(-rowHeight, rowHeight);
+        stars[i].z = ofRandom(0, stripWidth);
+      }
     }
   }
 
@@ -85,13 +87,20 @@ void ofApp::draw(){
   ofRotateZDeg(rot);
   ofTranslate(-8, -8);
 
-  ofPushMatrix();
-  // ofTranslate( stripWidth / 2.f, rowHeight / 2.f );
-  ofTranslate( 2, 16 );
-  for(int i=0; i < stars.size(); i++) {
-    star(stars[i].x, stars[i].y, stars[i].z);
+  if( cNote == 0) {
+    ofPushMatrix();
+    // ofTranslate( stripWidth / 2.f, rowHeight / 2.f );
+    ofTranslate( 2, 16 );
+    for(int i=0; i < stars.size(); i++) {
+      star(stars[i].x, stars[i].y, stars[i].z);
+    }
+    ofPopMatrix();
   }
-  ofPopMatrix();
+  else {
+    ofSetColor(0,160,15);
+    ofDrawRectangle(4,4,8,8);
+  }
+
   ofPopMatrix();
   fbo.end();
 
@@ -126,6 +135,10 @@ void ofApp::newMidiMessage(ofxMidiMessage& msg) {
 
 //--------------------------------------------------------------
 void ofApp::handleNote(int note) {
+  if( note == cNote ) {
+    // return;
+  }
+  cNote = note;
   cout << note << endl;
 }
 
