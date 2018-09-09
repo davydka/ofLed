@@ -52,7 +52,7 @@ easymidi.getInputs().forEach(function(inputName){
 });
 
 function handlePgm(pgm) {
-  if(pgm === currentPgm) {
+  if(pgm == currentPgm) {
     console.log('samesies');
     return;
   }
@@ -103,5 +103,6 @@ function handlePgm(pgm) {
     if(err) {
       console.log(err);
     }
+    currentPgm = pgm;
   });
 }
