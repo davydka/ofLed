@@ -3,8 +3,10 @@
 string INDEX;
 string MIDIPORT;
 string ROT;
+string FLIP;
 int rot = 0;
 int cNote = 0; // current note
+int flip = 0;
 int temp = 0;
 
 //--------------------------------------------------------------
@@ -19,10 +21,13 @@ void ofApp::setup() {
   INDEX = ofGetEnv("INDEX");
   MIDIPORT = ofGetEnv("MIDIPORT");
   ROT = ofGetEnv("ROT");
+  FLIP = ofGetEnv("FLIP");
   rot = ofToInt(ROT);
+  flip = ofToInt(FLIP);
   cout << "pifull INDEX: " << INDEX << endl;
   cout << "MIDIPORT: " << MIDIPORT << endl;
   cout << "ROT: " << ROT << endl;
+  cout << "FLIP: " << FLIP << endl;
 
   midiIn.listInPorts();
   if( MIDIPORT != "none") {
@@ -50,7 +55,7 @@ void ofApp::setup() {
 
   /* Configure our teensy boards (portName, xOffset, yOffset, width%, height%, direction) */
   //teensy.serialConfigure("cu.usbmodem2733511", 0, 0, 100, 100, 0);
-  teensy.serialConfigure("ttyACM0", 0, 0, 100, 100, 0);
+  teensy.serialConfigure("ttyACM0", 0, 0, 100, 100, flip);
   teensy.setBrightness(brightness);
 
 
