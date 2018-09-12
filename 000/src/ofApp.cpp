@@ -5,6 +5,7 @@ string MIDIPORT;
 string ROT;
 int rot = 0;
 int cNote = 0; // current note
+int temp = 0;
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -78,6 +79,10 @@ void ofApp::update(){
       }
     }
   }
+  temp++;
+  if(temp > 15){
+    temp = 0;
+  }
 
   teensy.update();                            // update our serial to teensy stuff
 }
@@ -94,7 +99,7 @@ void ofApp::draw(){
   ofTranslate(-8, -8);
 
   ofSetColor(255,0,15);
-  ofDrawRectangle(0,0,1,1);
+  ofDrawRectangle(temp,0,1,1);
 
   if( cNote == 0) {
     ofPushMatrix();
@@ -119,7 +124,7 @@ void ofApp::draw(){
 }
 
 void ofApp::star(float x, float y, float z) {
-  ofSetColor(255,160,15);
+  ofSetColor(200,130,15);
   ofFill();
 
   float sx = ofMap(x / z, 0, 1, 0, stripWidth);
