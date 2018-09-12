@@ -93,6 +93,9 @@ void ofApp::draw(){
   ofRotateZDeg(rot);
   ofTranslate(-8, -8);
 
+  ofSetColor(255,0,15);
+  ofDrawRectangle(0,0,1,1);
+
   if( cNote == 0) {
     ofPushMatrix();
     // ofTranslate( stripWidth / 2.f, rowHeight / 2.f );
