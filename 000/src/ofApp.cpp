@@ -2,6 +2,7 @@
 
 string INDEX;
 string MIDIPORT;
+string ROT;
 int rot = 0;
 int cNote = 0; // current note
 
@@ -16,8 +17,11 @@ void ofApp::setup() {
   // SYSTEM SETTINGS
   INDEX = ofGetEnv("INDEX");
   MIDIPORT = ofGetEnv("MIDIPORT");
+  ROT = ofGetEnv("ROT");
+  rot = ofToInt(ROT);
   cout << "pifull INDEX: " << INDEX << endl;
   cout << "MIDIPORT: " << MIDIPORT << endl;
+  cout << "ROT: " << ROT << endl;
 
   midiIn.listInPorts();
   if( MIDIPORT != "none") {
@@ -30,12 +34,6 @@ void ofApp::setup() {
     }
   }
 
-  if( INDEX != "0" && INDEX != "1" ) {
-    rot = 90;
-  }
-  if( INDEX == "1" ) {
-    rot = 270;
-  }
 
   // Teensy SYSTEM SETTINGS
   //--------------------------------------
