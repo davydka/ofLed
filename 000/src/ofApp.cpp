@@ -105,18 +105,19 @@ void ofApp::draw(){
 
   ofSetColor(255,0,15);
   // ofDrawRectangle(temp,0,1,1);
-  for(int x=4; x<12; x++) {
-    for(int y=4; y<12; y++) {
-      ofSetColor(
-        ofRandom(1,16),
-        ofRandom(1,16),
-        ofRandom(1,16)
-      );
-      ofDrawRectangle(x,y,1,1);
-    }
-  }
 
   if( cNote == 0) {
+    for(int x=4; x<12; x++) {
+      for(int y=4; y<12; y++) {
+        ofSetColor(
+          ofRandom(1,16),
+          ofRandom(1,16),
+          ofRandom(1,16)
+        );
+        ofDrawRectangle(x,y,1,1);
+      }
+    }
+
     ofPushMatrix();
     // ofTranslate( stripWidth / 2.f, rowHeight / 2.f );
     ofTranslate( 2, 16 );
