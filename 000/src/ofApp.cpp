@@ -31,6 +31,9 @@ void ofApp::setup() {
   }
 
   if( INDEX != "0" && INDEX != "1" ) {
+    rot = 90;
+  }
+  if( INDEX == "1" ) {
     rot = 270;
   }
 
