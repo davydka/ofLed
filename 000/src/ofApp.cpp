@@ -108,9 +108,9 @@ void ofApp::draw(){
   for(int x=0; x<16; x++) {
     for(int y=0; y<16; y++) {
       ofSetColor(
-        ofRandom(0,64),
-        ofRandom(0,64),
-        ofRandom(0,64)
+        ofRandom(0,48),
+        ofRandom(0,48),
+        ofRandom(0,48)
       );
       ofDrawRectangle(x,y,1,1);
     }
