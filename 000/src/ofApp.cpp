@@ -7,7 +7,7 @@ string FLIP;
 int rot = 0;
 int cNote = 0; // current note
 int flip = 0;
-int temp = 0;
+float temp = 0;
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -84,8 +84,8 @@ void ofApp::update(){
       }
     }
   }
-  temp++;
-  if(temp > 15){
+  temp = temp + .05;
+  if(temp > 11){
     temp = 0;
   }
 
@@ -105,12 +105,12 @@ void ofApp::draw(){
 
   ofSetColor(255,0,15);
   // ofDrawRectangle(temp,0,1,1);
-  for(int x=0; x<10; x++) {
-    for(int y=0; y<16; y++) {
+  for(int x=4; x<12; x++) {
+    for(int y=4; y<12; y++) {
       ofSetColor(
-        ofRandom(0,16),
-        ofRandom(0,16),
-        ofRandom(0,16)
+        ofRandom(1,16),
+        ofRandom(1,16),
+        ofRandom(1,16)
       );
       ofDrawRectangle(x,y,1,1);
     }
