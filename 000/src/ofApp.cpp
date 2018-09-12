@@ -107,7 +107,7 @@ void ofApp::draw(){
   }
   else {
     ofSetColor(0,160,15);
-    ofDrawRectangle(4,4,8,8);
+    ofDrawRectangle(0,0,8,8);
   }
 
   ofPopMatrix();
