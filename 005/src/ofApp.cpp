@@ -55,7 +55,7 @@ void ofApp::setup() {
   /* Configure our teensy boards (portName, xOffset, yOffset, width%, height%, direction) */
   //teensy.serialConfigure("cu.usbmodem2809741", 0, 0, 100, 100, 0);
   //teensy.serialConfigure("cu.usbmodem2733511", 0, 0, 100, 100, 0);
-  teensy.serialConfigure("ttyACM0", 0, 0, 100, 100, 0);
+  teensy.serialConfigure("ttyACM0", 0, 0, 100, 100, flip);
   teensy.setBrightness(brightness);
 
 
