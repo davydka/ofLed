@@ -87,12 +87,12 @@ void ofApp::draw(){
     // ofPushMatrix();
     // ofTranslate( stripWidth / 2.f, rowHeight / 2.f );
     ofSetColor(160,20,45);
-    ofDrawRectangle(4,4,8,8);
+    ofDrawRectangle(0,0,8,8);
     // ofPopMatrix();
   }
   if( cNote == 1) {
     ofSetColor(20,20,160);
-    ofDrawRectangle(4,4,8,8);
+    ofDrawRectangle(0,0,8,8);
   }
   if( cNote == 2) {
     ofSetColor(20,160,45);
