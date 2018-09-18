@@ -76,6 +76,19 @@ void ofApp::setup() {
 void ofApp::update(){
   temp++;
 
+  if( cNote == 6) {
+    /*
+    xx = ofWrap(
+          ofMap(temp, 0, 125, 0, 255),
+          0,
+          255
+        );
+    */
+    xx = ofMap(temp, 0, 130, 0, 255),
+    // ofSetColor(xx,xx,45);
+    // ofDrawRectangle(4,4,8,8);
+  }
+
   teensy.update();                            // update our serial to teensy stuff
 }
 
@@ -222,7 +235,7 @@ void ofApp::draw(){
           255
         );
     */
-    xx = ofMap(temp, 0, 130, 0, 255),
+    // xx = ofMap(temp, 0, 130, 0, 255),
     ofSetColor(xx,xx,45);
     ofDrawRectangle(4,4,8,8);
   }
