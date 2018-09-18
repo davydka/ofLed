@@ -96,8 +96,14 @@ void ofApp::draw(){
     ofPopMatrix();
   }
   if( cNote == 1) {
+    xx = ofMap(temp, 0, 960, 1, 0);
+    ofPushMatrix();
+    ofTranslate( 8, 8 );
     ofSetColor(20,20,160);
-    ofDrawRectangle(0,0,8,8);
+    ofScale(xx,xx,1);
+    ofDrawRectangle(-8,-8,16,16);
+    ofTranslate(-8,-8);
+    ofPopMatrix();
   }
   if( cNote == 2) {
     ofSetColor(20,160,45);
@@ -131,15 +137,6 @@ void ofApp::draw(){
   teensy.draw(32,32);
 }
 
-void ofApp::star(float x, float y, float z, float w) {
-  ofSetColor(0,255,0);
-  ofFill();
-
-  float sx = ofMap(x / z, 0, 1, 0, stripWidth);
-  float sy = ofMap(y / z, 0, 1, 0, rowHeight);
-  float r = ofMap(z, 0, ofGetWidth(), 2, 0);
-  ofDrawCircle(sx, sy, r);
-}
 //--------------------------------------------------------------
 void ofApp::newMidiMessage(ofxMidiMessage& msg) {
   if( msg.channel != 6 ) {
