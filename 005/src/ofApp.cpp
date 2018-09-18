@@ -215,11 +215,14 @@ void ofApp::draw(){
     ofDrawRectangle(0,rr,16,4);
   }
   if( cNote == 6) {
+    /*
     xx = ofWrap(
           ofMap(temp, 0, 125, 0, 255),
           0,
           255
         );
+    */
+    xx = ofMap(temp, 0, 130, 0, 255),
     ofSetColor(xx,xx,45);
     ofDrawRectangle(4,4,8,8);
   }
