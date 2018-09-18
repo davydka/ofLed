@@ -78,10 +78,10 @@ void ofApp::setup() {
   // allocate our pixels, fbo, and texture
   fbo.allocate(stripWidth, stripHeight*stripsPerPort*numPorts, GL_RGB);
 
-  cc = ofRandom(0, 160);
-  cx = ofRandom(0, 160);
-  dc = ofRandom(0, 160);
-  dx = ofRandom(0, 160);
+  cc = ofRandom(0, 110);
+  cx = ofRandom(0, 120);
+  dc = ofRandom(0, 100);
+  dx = ofRandom(0, 80);
 }
 
 //--------------------------------------------------------------
@@ -117,28 +117,28 @@ void ofApp::update(){
       dx--;
     }
 
-    if(cc > 160) {
+    if(cc > 110) {
       ccb = !ccb;
     }
     if(cc < 0) {
       ccb = !ccb;
     }
 
-    if(cx > 160) {
+    if(cx > 120) {
       cxb = !cxb;
     }
     if(cx < 0) {
       cxb = !cxb;
     }
 
-    if(dc > 160) {
+    if(dc > 100) {
       dcb = !dcb;
     }
     if(dc < 0) {
       dcb = !dcb;
     }
 
-    if(dx > 160) {
+    if(dx > 80) {
       dxb = !dxb;
     }
     if(dx < 0) {
@@ -287,10 +287,10 @@ void ofApp::draw(){
   if( cNote == 6) {
     // cc++;
     // xx = ofMap(temp, 0, 130, 0, 255);
-    ofSetColor(dc,5,dx);
+    ofSetColor(dc,cx,dx);
     ofDrawRectangle(0,0,16,16);
 
-    ofSetColor(cc,cx,5);
+    ofSetColor(cc,5,5);
     ofDrawRectangle(4,4,8,8);
     if(indexInt == 3) {
       ofSetColor(0, 0, 0);
