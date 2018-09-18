@@ -5,7 +5,7 @@ string MIDIPORT;
 string ROT;
 string FLIP;
 int rot = 0;
-int cNote = 0; // current note
+int cNote = 3; // current note
 int flip = 0;
 float temp = 0;
 
@@ -115,16 +115,27 @@ void ofApp::draw(){
     ofRotateZDeg(45);
     ofTranslate(-8, -8);
     ofSetColor(0,0,0);
-    // ofSetColor(20,160,45);
-    // ofTranslate(4, 4);
     ofScale(xx,xx,1);
     ofDrawRectangle(2,2,12,12);
-    // ofTranslate(-4, -4);
     ofPopMatrix();
   }
   if( cNote == 3) {
-    ofSetColor(45,45,100);
+    xx = ofMap(temp, 0, 480, 0, 360);
+    ofPushMatrix();
+    ofTranslate(8, 8);
+    ofRotateZDeg(xx);
+    ofTranslate(-8, -8);
+
+    ofSetColor(45,140,180);
+    ofDrawRectangle(8,8,8,8);
+
+    ofSetColor(180,140,45);
+    ofDrawRectangle(0,0,8,8);
+
+    ofSetColor(180,45,140);
     ofDrawRectangle(4,4,8,8);
+    ofPopMatrix();
+
   }
   if( cNote == 4) {
     ofSetColor(100,100,45);
