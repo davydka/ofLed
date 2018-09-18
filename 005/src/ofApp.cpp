@@ -24,6 +24,9 @@ float dc = 0;
 bool dcb = true;
 float dx = 0;
 bool dxb = true;
+
+float fdbkT = 0;
+float fdbkB = 0;
 //--------------------------------------------------------------
 void ofApp::setup() {
   ofBackground(0, 0, 0);                      // default background to black / LEDs off
@@ -77,6 +80,7 @@ void ofApp::setup() {
 
   // allocate our pixels, fbo, and texture
   fbo.allocate(stripWidth, stripHeight*stripsPerPort*numPorts, GL_RGB);
+  fdbk.allocate(stripWidth, stripHeight*stripsPerPort*numPorts, GL_RGB);
 
   cc = ofRandom(0, 110);
   cx = ofRandom(0, 120);
@@ -143,6 +147,12 @@ void ofApp::update(){
     }
     if(dx < 0) {
       dxb = !dxb;
+    }
+
+    fdbkB++;
+    fdbkT = ofMap(fdbkB, 0, 1910, 0, 16);
+    if(fdbkB > 1910) {
+      // fdbkB = 0;
     }
   }
 
@@ -288,7 +298,7 @@ void ofApp::draw(){
     // cc++;
     // xx = ofMap(temp, 0, 130, 0, 255);
     ofSetColor(dc,cx,dx);
-    ofDrawRectangle(0,0,16,16);
+        ofDrawRectangle(0,0,fdbkT,16);
 
     ofSetColor(cc,5,5);
     ofDrawRectangle(4,4,8,8);
@@ -336,6 +346,7 @@ void ofApp::handleNote(int note) {
   cout << temp << endl;
   cout << note << endl;
   temp = 0;
+  fdbkB = 0;
 }
 
 //--------------------------------------------------------------
