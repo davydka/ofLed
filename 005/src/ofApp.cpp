@@ -9,6 +9,8 @@ int cNote = 0; // current note
 int flip = 0;
 float temp = 0;
 
+float xx = 0;
+
 //--------------------------------------------------------------
 void ofApp::setup() {
   ofBackground(0, 0, 0);                      // default background to black / LEDs off
@@ -84,11 +86,14 @@ void ofApp::draw(){
 
 
   if( cNote == 0) {
-    // ofPushMatrix();
-    // ofTranslate( stripWidth / 2.f, rowHeight / 2.f );
-    ofSetColor(160,20,160);
+    xx = ofMap(temp, 0, 920, 0, 360);
+    ofPushMatrix();
+    ofTranslate( stripWidth / 2.f, rowHeight / 2.f );
+    ofRotateDeg(xx);
+    ofTranslate( -stripWidth / 2.f, -rowHeight / 2.f );
+    ofSetColor(160,20,45);
     ofDrawTriangle(0,16, 8,0, 16,16);
-    // ofPopMatrix();
+    ofPopMatrix();
   }
   if( cNote == 1) {
     ofSetColor(20,20,160);
