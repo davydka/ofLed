@@ -86,8 +86,8 @@ void ofApp::draw(){
   if( cNote == 0) {
     // ofPushMatrix();
     // ofTranslate( stripWidth / 2.f, rowHeight / 2.f );
-    ofSetColor(160,20,45);
-    ofDrawRectangle(0,0,8,8);
+    ofSetColor(160,20,160);
+    ofDrawTriangle(0,16, 8,0, 16,16);
     // ofPopMatrix();
   }
   if( cNote == 1) {
