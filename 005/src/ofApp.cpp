@@ -4,8 +4,9 @@ string INDEX;
 string MIDIPORT;
 string ROT;
 string FLIP;
+int indexInt = 0;
 int rot = 0;
-int cNote = 3; // current note
+int cNote = 1; // current note
 int flip = 0;
 float temp = 0;
 
@@ -24,6 +25,7 @@ void ofApp::setup() {
   MIDIPORT = ofGetEnv("MIDIPORT");
   ROT = ofGetEnv("ROT");
   FLIP = ofGetEnv("FLIP");
+  indexInt = ofToInt(INDEX);
   rot = ofToInt(ROT);
   flip = ofToInt(FLIP);
   cout << "pifull INDEX: " << INDEX << endl;
@@ -118,6 +120,11 @@ void ofApp::draw(){
     ofScale(xx,xx,1);
     ofDrawRectangle(2,2,12,12);
     ofPopMatrix();
+
+    if(indexInt == 3) {
+      ofSetColor(0, 0, 0);
+      ofDrawRectangle(8, 3, 1, 1);
+    }
   }
   if( cNote == 3) {
     xx = ofMap(temp, 0, 480, 0, 360);
