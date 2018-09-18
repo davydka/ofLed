@@ -143,6 +143,10 @@ void ofApp::draw(){
     ofDrawRectangle(4,4,8,8);
     ofPopMatrix();
 
+    if(indexInt == 3) {
+      ofSetColor(0, 0, 0);
+      ofDrawRectangle(8, 3, 1, 1);
+    }
   }
   if( cNote == 4) {
     ofSetColor(100,100,45);
