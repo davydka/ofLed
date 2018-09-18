@@ -86,7 +86,7 @@ void ofApp::draw(){
 
 
   if( cNote == 0) {
-    xx = ofMap(temp, 0, 920, 0, 360);
+    xx = ofMap(temp, 0, 960, 0, 360);
     ofPushMatrix();
     ofTranslate( stripWidth / 2.f, rowHeight / 2.f );
     ofRotateDeg(xx);
