@@ -6,12 +6,15 @@ string ROT;
 string FLIP;
 int indexInt = 0;
 int rot = 0;
-int cNote = 4; // current note
+int cNote = 5; // current note
 int flip = 0;
 float temp = 0;
 
 float xx = 0;
 float dd = 0;
+float ee = 0;
+float tt = 0;
+float rr = 0;
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -186,6 +189,30 @@ void ofApp::draw(){
   if( cNote == 5) {
     ofSetColor(160,20,160);
     ofDrawRectangle(4,4,8,8);
+
+    xx = ofMap(temp, 0, 240, -4, 16);
+    dd = ofMap(temp, 0, 240, 16, 0);
+    ee = ofMap(temp, 0, 240, 20, -4);
+
+    tt = ofMap(temp, 0, 240, 0, 360);
+    rr = ofMap(temp, 0, 500, -4, 20);
+
+    ofSetColor(20,20,160);
+    ofDrawRectangle(xx,0,4,16);
+
+    ofSetColor(20,160,160);
+    ofDrawRectangle(0,dd,16,4);
+
+    ofPushMatrix();
+    ofTranslate(8, 8);
+    ofRotateZDeg(tt);
+    ofTranslate(-8, -8);
+    ofSetColor(160,20,20);
+    ofDrawRectangle(ee,0,4,16);
+    ofPopMatrix();
+
+    ofSetColor(160,160,20);
+    ofDrawRectangle(0,rr,16,4);
   }
   if( cNote == 6) {
     ofSetColor(160,160,45);
