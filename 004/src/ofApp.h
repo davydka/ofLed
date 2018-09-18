@@ -2,30 +2,40 @@
 
 #include "ofxTeensyOcto.h"
 #include "ofMain.h"
+#include "ofxMidi.h"
 
-class ofApp : public ofBaseApp{
+class ofApp : public ofBaseApp, public ofxMidiListener {
 
-	public:
-		void setup();
-		void update();
-		void draw();
-		void gotMessage(ofMessage msg);
+  public:
+    void setup();
+    void update();
+    void draw();
+    void exit();
+    void gotMessage(ofMessage msg);
 
-		// LED - Teensy stuff
-		ofxTeensyOcto teensy;
-		int stripWidth;
-		int stripHeight;
-		int rowHeight;
-		int stripsPerPort;
-		int numPorts;
-		int brightness;
+    // MIDI stuff
+    ofxMidiIn midiIn;
+    void newMidiMessage(ofxMidiMessage& eventArgs);
+    void handleNote(int note);
+    std::vector<ofxMidiMessage> midiMessages;
+    std::size_t maxMessages = 10; // messages to keep track of
 
-		// FBO stuff
-		//-----------------------------
-		ofFbo fbo;
+    // LED - Teensy stuff
+    ofxTeensyOcto teensy;
+    int stripWidth;
+    int stripHeight;
+    int rowHeight;
+    int stripsPerPort;
+    int numPorts;
+    int brightness;
 
-		// Graphic functions
-		//-----------------------------
-		void star(float x, float y, float z, float w);
-		vector <ofVec4f> stars;
+    // FBO stuff
+    //-----------------------------
+    ofFbo fbo;
+    ofFbo fdbk;
+
+    // Graphic functions
+    //-----------------------------
+    void star(float x, float y, float z, float w);
+    vector <ofVec4f> stars;
 };

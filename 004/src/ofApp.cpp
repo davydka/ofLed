@@ -1,5 +1,15 @@
 #include "ofApp.h"
 
+string INDEX;
+string MIDIPORT;
+string ROT;
+string FLIP;
+int indexInt = 0;
+int rot = 0;
+int cNote = 100; // current note
+int flip = 0;
+float temp = 0;
+
 //--------------------------------------------------------------
 void ofApp::setup() {
   ofBackground(0, 0, 0);                      // default background to black / LEDs off
@@ -9,6 +19,30 @@ void ofApp::setup() {
   ofSetWindowPosition(0, 0);
 
   // SYSTEM SETTINGS
+  INDEX = ofGetEnv("INDEX");
+  MIDIPORT = ofGetEnv("MIDIPORT");
+  ROT = ofGetEnv("ROT");
+  FLIP = ofGetEnv("FLIP");
+  indexInt = ofToInt(INDEX);
+  rot = ofToInt(ROT);
+  flip = ofToInt(FLIP);
+  cout << "pifull INDEX: " << INDEX << endl;
+  cout << "MIDIPORT: " << MIDIPORT << endl;
+  cout << "ROT: " << ROT << endl;
+  cout << "FLIP: " << FLIP << endl;
+
+  midiIn.listInPorts();
+  if( MIDIPORT != "none") {
+    for( int i = 0; i < midiIn.getNumInPorts(); i++ ) {
+      if( ofIsStringInString(midiIn.getInPortName(i), MIDIPORT) ) {
+        midiIn.openPort(i);
+        midiIn.addListener(this);
+      }
+      // cout << midiIn.getInPortName(i) << endl;
+    }
+  }
+
+  // Teensy SYSTEM SETTINGS
   //--------------------------------------
   stripWidth = 16;                            // pixel width of strip
   stripHeight = 128;                            // pixel height of strip
@@ -29,6 +63,7 @@ void ofApp::setup() {
 
   // allocate our pixels, fbo, and texture
   fbo.allocate(stripWidth, stripHeight*stripsPerPort*numPorts, GL_RGB);
+  fdbk.allocate(stripWidth, stripHeight*stripsPerPort*numPorts, GL_RGB);
 
   stars.resize(80);
   for(int i=0; i < stars.size(); i++) {
@@ -41,8 +76,10 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update(){
+  temp++;
+
   for(int i=0; i < stars.size(); i++) {
-    stars[i].z = stars[i].z - .5;
+    stars[i].z = stars[i].z - .22;
     stars[i].w = stars[i].z;
 
     if(stars[i].z < 1) {
@@ -73,6 +110,39 @@ void ofApp::draw(){
   fbo.readToPixels(teensy.pixels1);           // send fbo pixels to teensy
   // fbo.draw(0, 0);
   teensy.draw(32,32);
+}
+
+//--------------------------------------------------------------
+void ofApp::newMidiMessage(ofxMidiMessage& msg) {
+  if( msg.channel != 6 ) {
+    return;
+  }
+  if( msg.status == MIDI_NOTE_ON && msg.velocity > 0 ) {
+    handleNote(msg.pitch);
+  }
+  if( msg.status == MIDI_CONTROL_CHANGE ) {
+    // cout << msg.control << endl;
+    // cout << msg.value << endl;
+  }
+}
+
+//--------------------------------------------------------------
+void ofApp::handleNote(int note) {
+  if( note == cNote ) {
+    // return;
+  }
+  cNote = note;
+  cout << temp << endl;
+  cout << note << endl;
+  temp = 0;
+}
+
+//--------------------------------------------------------------
+void ofApp::exit() {
+  if( MIDIPORT != "none") {
+    midiIn.closePort();
+    midiIn.removeListener(this);
+  }
 }
 
 void ofApp::star(float x, float y, float z, float w) {
