@@ -126,13 +126,13 @@ void ofApp::draw(){
     ofRotateZDeg(xx);
     ofTranslate(-8, -8);
 
-    ofSetColor(45,110,130);
+    ofSetColor(45,80,100);
     ofDrawRectangle(8,8,8,8);
 
-    ofSetColor(130,110,45);
+    ofSetColor(100,80,45);
     ofDrawRectangle(0,0,8,8);
 
-    ofSetColor(130,45,110);
+    ofSetColor(100,45,80);
     ofDrawRectangle(4,4,8,8);
     ofPopMatrix();
 
