@@ -173,9 +173,6 @@ void ofApp::update(){
 
     fdbkB++;
     fdbkT = ofMap(fdbkB, 0, 1910, 0, 16);
-    if(fdbkB > 1910) {
-      // fdbkB = 0;
-    }
   }
 
   teensy.update();                            // update our serial to teensy stuff
@@ -320,7 +317,7 @@ void ofApp::draw(){
     // cc++;
     // xx = ofMap(temp, 0, 130, 0, 255);
     ofSetColor(dc,cx,dx);
-        ofDrawRectangle(0,0,fdbkT,16);
+    ofDrawRectangle(0,0,fdbkT,16);
 
     ofSetColor(cc,5,5);
     ofDrawRectangle(4,4,8,8);
