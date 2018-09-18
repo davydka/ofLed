@@ -84,7 +84,7 @@ void ofApp::update(){
           255
         );
     */
-    xx = ofMap(temp, 0, 130, 0, 255),
+    xx = ofMap(temp, 0, 130, 0, 255);
     // ofSetColor(xx,xx,45);
     // ofDrawRectangle(4,4,8,8);
   }
@@ -235,7 +235,7 @@ void ofApp::draw(){
           255
         );
     */
-    // xx = ofMap(temp, 0, 130, 0, 255),
+    // xx = ofMap(temp, 0, 130, 0, 255);
     ofSetColor(xx,xx,45);
     ofDrawRectangle(4,4,8,8);
   }
