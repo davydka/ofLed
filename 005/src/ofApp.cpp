@@ -16,6 +16,14 @@ float ee = 0;
 float tt = 0;
 float rr = 0;
 
+float cc = 0;
+bool ccb = true;
+float cx = 0;
+bool cxb = true;
+float dc = 0;
+bool dcb = true;
+float dx = 0;
+bool dxb = true;
 //--------------------------------------------------------------
 void ofApp::setup() {
   ofBackground(0, 0, 0);                      // default background to black / LEDs off
@@ -70,6 +78,10 @@ void ofApp::setup() {
   // allocate our pixels, fbo, and texture
   fbo.allocate(stripWidth, stripHeight*stripsPerPort*numPorts, GL_RGB);
 
+  cc = ofRandom(0, 160);
+  cx = ofRandom(0, 160);
+  dc = ofRandom(0, 160);
+  dx = ofRandom(0, 160);
 }
 
 //--------------------------------------------------------------
@@ -77,16 +89,61 @@ void ofApp::update(){
   temp++;
 
   if( cNote == 6) {
-    /*
-    xx = ofWrap(
-          ofMap(temp, 0, 125, 0, 255),
-          0,
-          255
-        );
-    */
-    xx = ofMap(temp, 0, 130, 0, 255);
-    // ofSetColor(xx,xx,45);
-    // ofDrawRectangle(4,4,8,8);
+    if(ccb) {
+      cc++;
+    }
+    if(!ccb) {
+      cc--;
+    }
+
+    if(cxb) {
+      cx++;
+    }
+    if(!cxb) {
+      cx--;
+    }
+
+    if(dcb) {
+      dc++;
+    }
+    if(!dcb) {
+      dc--;
+    }
+
+    if(dxb) {
+      dx++;
+    }
+    if(!dxb) {
+      dx--;
+    }
+
+    if(cc > 160) {
+      ccb = !ccb;
+    }
+    if(cc < 0) {
+      ccb = !ccb;
+    }
+
+    if(cx > 160) {
+      cxb = !cxb;
+    }
+    if(cx < 0) {
+      cxb = !cxb;
+    }
+
+    if(dc > 160) {
+      dcb = !dcb;
+    }
+    if(dc < 0) {
+      dcb = !dcb;
+    }
+
+    if(dx > 160) {
+      dxb = !dxb;
+    }
+    if(dx < 0) {
+      dxb = !dxb;
+    }
   }
 
   teensy.update();                            // update our serial to teensy stuff
@@ -228,16 +285,21 @@ void ofApp::draw(){
     ofDrawRectangle(0,rr,16,4);
   }
   if( cNote == 6) {
-    /*
-    xx = ofWrap(
-          ofMap(temp, 0, 125, 0, 255),
-          0,
-          255
-        );
-    */
+    // cc++;
     // xx = ofMap(temp, 0, 130, 0, 255);
-    ofSetColor(xx,xx,45);
+    ofSetColor(dc,5,dx);
+    ofDrawRectangle(0,0,16,16);
+
+    ofSetColor(cc,cx,5);
     ofDrawRectangle(4,4,8,8);
+    if(indexInt == 3) {
+      ofSetColor(0, 0, 0);
+      ofDrawRectangle(8, 3, 1, 1);
+    }
+    if(indexInt == 4) {
+      ofSetColor(0, 0, 0);
+      ofDrawRectangle(14, 7, 1, 1);
+    }
   }
 
 
