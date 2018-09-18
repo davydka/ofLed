@@ -3,6 +3,9 @@
 #include "ofxTeensyOcto.h"
 #include "ofMain.h"
 #include "ofxMidi.h"
+#include "ofxAssimpModelLoader.h"
+#include "ofVboMesh.h"
+#include "ofxXmlSettings.h"
 
 class ofApp : public ofBaseApp, public ofxMidiListener {
 
@@ -38,4 +41,10 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
     //-----------------------------
     void star(float x, float y, float z, float w);
     vector <ofVec4f> stars;
+
+    // Model Stuff
+    ofxXmlSettings xml;
+    ofxAssimpModelLoader model;
+    float animationPosition;
+    ofEasyCam cam;
 };

@@ -1,2 +1,4 @@
 ofxTeensyOcto
 ofxMidi
+ofxAssimpModelLoader
+ofxXmlSettings
