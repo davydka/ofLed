@@ -32,6 +32,7 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
     // FBO stuff
     //-----------------------------
     ofFbo fbo;
+    ofFbo fdbk;
 
     // Graphic functions
     //-----------------------------
