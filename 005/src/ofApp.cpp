@@ -107,7 +107,20 @@ void ofApp::draw(){
   }
   if( cNote == 2) {
     ofSetColor(20,160,45);
-    ofDrawRectangle(4,4,8,8);
+    ofDrawRectangle(0,0,16,16);
+
+    xx = ofMap(temp, 0, 1910, 0, 1);
+    ofPushMatrix();
+    ofTranslate(8, 8);
+    ofRotateZDeg(45);
+    ofTranslate(-8, -8);
+    ofSetColor(0,0,0);
+    // ofSetColor(20,160,45);
+    // ofTranslate(4, 4);
+    ofScale(xx,xx,1);
+    ofDrawRectangle(2,2,12,12);
+    // ofTranslate(-4, -4);
+    ofPopMatrix();
   }
   if( cNote == 3) {
     ofSetColor(45,45,100);
