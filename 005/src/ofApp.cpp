@@ -389,7 +389,7 @@ void ofApp::exit() {
 }
 
 void ofApp::star(float x, float y, float z, float w) {
-  ofSetColor(5,90,90);
+  ofSetColor(5,90,5);
   ofFill();
 
   float sx = ofMap(x / z, 0, 1, 0, stripWidth);
