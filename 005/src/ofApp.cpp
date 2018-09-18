@@ -6,7 +6,7 @@ string ROT;
 string FLIP;
 int indexInt = 0;
 int rot = 0;
-int cNote = 0; // current note
+int cNote = 100; // current note
 int flip = 0;
 float temp = 0;
 
@@ -86,11 +86,33 @@ void ofApp::setup() {
   cx = ofRandom(0, 120);
   dc = ofRandom(0, 100);
   dx = ofRandom(0, 80);
+
+  stars.resize(80);
+  for(int i=0; i < stars.size(); i++) {
+    stars[i].x = ofRandom(-stripWidth, stripWidth);
+    stars[i].y = ofRandom(-rowHeight, rowHeight);
+    stars[i].z = ofRandom(0, stripWidth);
+    stars[i].w = stars[i].z;
+  }
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
   temp++;
+
+  if( cNote == 100) {
+    for(int i=0; i < stars.size(); i++) {
+        stars[i].z = stars[i].z - .25;
+        stars[i].w = stars[i].z;
+
+        if(stars[i].z < 1) {
+          stars[i].x = ofRandom(-stripWidth, stripWidth);
+          stars[i].y = ofRandom(-rowHeight, rowHeight);
+          stars[i].z = ofRandom(0, stripWidth);
+          stars[i].w = stars[i].z;
+        }
+    }
+  }
 
   if( cNote == 6) {
     if(ccb) {
@@ -312,6 +334,15 @@ void ofApp::draw(){
     }
   }
 
+  if( cNote == 100) {
+    ofPushMatrix();
+      ofTranslate( stripWidth / 2.f, rowHeight / 2.f );
+      for(int i=0; i < stars.size(); i++) {
+        star(stars[i].x, stars[i].y, stars[i].z, stars[i].w);
+      }
+    ofPopMatrix();
+  }
+
 
 
 
@@ -355,6 +386,16 @@ void ofApp::exit() {
     midiIn.closePort();
     midiIn.removeListener(this);
   }
+}
+
+void ofApp::star(float x, float y, float z, float w) {
+  ofSetColor(5,90,90);
+  ofFill();
+
+  float sx = ofMap(x / z, 0, 1, 0, stripWidth);
+  float sy = ofMap(y / z, 0, 1, 0, rowHeight);
+  float r = ofMap(z, 0, ofGetWidth(), 2, 0);
+  ofDrawCircle(sx, sy, r);
 }
 
 //--------------------------------------------------------------
