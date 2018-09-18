@@ -6,7 +6,7 @@ string ROT;
 string FLIP;
 int indexInt = 0;
 int rot = 0;
-int cNote = 5; // current note
+int cNote = 6; // current note
 int flip = 0;
 float temp = 0;
 
@@ -215,7 +215,12 @@ void ofApp::draw(){
     ofDrawRectangle(0,rr,16,4);
   }
   if( cNote == 6) {
-    ofSetColor(160,160,45);
+    xx = ofWrap(
+          ofMap(temp, 0, 125, 0, 255),
+          0,
+          255
+        );
+    ofSetColor(xx,xx,45);
     ofDrawRectangle(4,4,8,8);
   }
 
