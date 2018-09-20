@@ -122,6 +122,19 @@ void ofApp::draw(){
     ofDrawRectangle(8,8,dd,dd);
   }
 
+  if( cNote != 0 && cNote != 100) {
+    for(int x=4; x<12; x++) {
+      for(int y=4; y<12; y++) {
+        ofSetColor(
+          ofRandom(1,32),
+          ofRandom(1,32),
+          ofRandom(1,32)
+        );
+        ofDrawRectangle(x,y,1,1);
+      }
+    }
+  }
+
   if( cNote == 100) {
     for(int x=4; x<12; x++) {
       for(int y=4; y<12; y++) {
