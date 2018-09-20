@@ -6,7 +6,7 @@ string ROT;
 string FLIP;
 int indexInt = 0;
 int rot = 0;
-int cNote = 0; // current note
+int cNote = 100; // current note
 int flip = 0;
 float temp = 0;
 
@@ -74,7 +74,7 @@ void ofApp::setup() {
   }
 
   /* LUT */
-  videoPlayer.load("01.mp4");
+  videoPlayer.load("00.mp4");
   handleOpen();
 
   dir.allowExt("cube");
@@ -95,7 +95,7 @@ void ofApp::setup() {
 void ofApp::update(){
   temp++;
 
-  if( cNote == 0 || cNote == 1) {
+  if( cNote != 100 ) {
     videoPlayer.update();
     if (videoPlayer.isFrameNew()){
       if (doLUT) {
@@ -140,7 +140,7 @@ void ofApp::draw(){
   ofRotateZDeg(rot);
   ofTranslate(-8, -8);
 
-  if( cNote == 0 || cNote == 1 ) {
+  if( cNote != 100 ) {
     if(videoPlayer.isLoaded()){
       /* LUT */
       if(doLUT)
@@ -190,22 +190,28 @@ void ofApp::newMidiMessage(ofxMidiMessage& msg) {
 //--------------------------------------------------------------
 void ofApp::handleNote(int note) {
   if( note != cNote && note == 0 ) {
-    cout << "00" << endl;
     videoPlayer.load("00.mp4");
     handleOpen();
   }
   if( note != cNote && note == 1 ) {
-    cout << "01" << endl;
     videoPlayer.load("01.mp4");
+    handleOpen();
+  }
+  if( note != cNote && note == 2 ) {
+    videoPlayer.load("02.mp4");
+    handleOpen();
+  }
+  if( note != cNote && note == 3 ) {
+    videoPlayer.load("03.mp4");
     handleOpen();
   }
 
   cNote = note;
   // cout << temp << endl;
-  // cout << note << endl;
+  cout << note << endl;
   temp = 0;
 
-  if( cNote == 0 || cNote == 1 ) {
+  if( cNote != 100 ) {
     videoPlayer.setFrame(0);
   }
 }
