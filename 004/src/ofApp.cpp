@@ -74,7 +74,7 @@ void ofApp::setup() {
   }
 
   /* LUT */
-  videoPlayer.load("00.mp4");
+  videoPlayer.load("01.mp4");
   handleOpen();
 
   dir.allowExt("cube");
@@ -191,10 +191,12 @@ void ofApp::handleNote(int note) {
     // return;
   }
   if( note != cNote && note == 0 ) {
+    cout << "00" << endl;
     videoPlayer.load("00.mp4");
     handleOpen();
   }
   if( note != cNote && note == 1 ) {
+    cout << "01" << endl;
     videoPlayer.load("01.mp4");
     handleOpen();
   }
