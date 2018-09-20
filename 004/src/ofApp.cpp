@@ -101,6 +101,11 @@ void ofApp::draw(){
   ofClear(0,0,0);                             // refreshes fbo, removes artifacts
   ofSetColor(255);
 
+  ofPushMatrix();
+  ofTranslate(8, 8);
+  ofRotateZDeg(rot);
+  ofTranslate(-8, -8);
+
   if( cNote == 0 ) {
     ofSetColor(0,60,255);
     ofDrawRectangle(0,0,16,16);
@@ -124,6 +129,7 @@ void ofApp::draw(){
     ofPopMatrix();
   }
 
+  ofPopMatrix();
   fbo.end();
   fbo.readToPixels(teensy.pixels1);           // send fbo pixels to teensy
   // fbo.draw(0, 0);
