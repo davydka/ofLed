@@ -38,4 +38,25 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
     //-----------------------------
     void star(float x, float y, float z, float w);
     vector <ofVec4f> stars;
+
+    // VIDEO Stuff
+    void handleOpen();
+    ofVideoPlayer videoPlayer;
+    ofPixels pix;
+    ofImage img;
+
+    // LUT Stuff
+    void loadLUT(string path);
+    void applyLUT(ofPixelsRef pix);
+
+    bool doLUT;
+    int dirLoadIndex;
+    ofDirectory dir;
+    ofPoint lutPos;
+    ofPoint thumbPos;
+
+    bool LUTloaded;
+    ofVec3f lut[32][32][32];
+
+    ofImage lutImg;
 };

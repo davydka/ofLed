@@ -6,7 +6,7 @@ string ROT;
 string FLIP;
 int indexInt = 0;
 int rot = 0;
-int cNote = 100; // current note
+int cNote = 0; // current note
 int flip = 0;
 float temp = 0;
 
@@ -72,11 +72,40 @@ void ofApp::setup() {
     stars[i].z = ofRandom(0, stripWidth);
     stars[i].w = stars[i].z;
   }
+
+  /* LUT */
+  videoPlayer.load("00.mp4");
+  handleOpen();
+
+  dir.allowExt("cube");
+  dir.listDir("LUTs/");
+  dir.sort();
+  if (dir.size()>0) {
+    dirLoadIndex=0;
+    loadLUT(dir.getPath(dirLoadIndex));
+    doLUT = true;
+  }else{
+    doLUT = false;
+  }
+
+  lutImg.allocate(16, 16, OF_IMAGE_COLOR);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
   temp++;
+
+  if( cNote == 0 ) {
+    videoPlayer.update();
+    if (videoPlayer.isFrameNew()){
+      if (doLUT) {
+        pix = videoPlayer.getPixels();
+        img.setFromPixels(pix);
+        img.resize(16,16);
+        applyLUT(img.getPixels());
+      }
+  }
+  }
 
   if( cNote == 100) {
     for(int i=0; i < stars.size(); i++) {
@@ -107,8 +136,14 @@ void ofApp::draw(){
   ofTranslate(-8, -8);
 
   if( cNote == 0 ) {
-    ofSetColor(0,60,255);
-    ofDrawRectangle(0,0,16,16);
+    // ofSetColor(0,60,255);
+    // ofDrawRectangle(0,0,16,16);
+
+    if(videoPlayer.isLoaded()){
+      /* LUT */
+      if(doLUT)
+        lutImg.draw(0,0,16,16);
+    }
 
     if(indexInt == 3) {
       ofSetColor(0, 0, 0);
@@ -177,6 +212,67 @@ void ofApp::star(float x, float y, float z, float w) {
   float sy = ofMap(y / z, 0, 1, 0, rowHeight);
   float r = ofMap(z, 0, ofGetWidth(), 2, 0);
   ofDrawCircle(sx, sy, r);
+}
+
+void ofApp::loadLUT(string path){
+  LUTloaded=false;
+
+  ofFile file(path);
+  string line;
+  for(int i = 0; i < 5; i++) {
+    getline(file, line);
+    ofLog() << "Skipped line: " << line;
+  }
+  for(int z=0; z<32; z++){
+    for(int y=0; y<32; y++){
+      for(int x=0; x<32; x++){
+        ofVec3f cur;
+        file >> cur.x >> cur.y >> cur.z;
+        lut[x][y][z] = cur;
+      }
+    }
+  }
+
+  LUTloaded = true;
+}
+
+void ofApp::applyLUT(ofPixelsRef pix){
+  if (LUTloaded) {
+
+    for(int y = 0; y < pix.getHeight(); y++){
+      for(int x = 0; x < pix.getWidth(); x++){
+
+        ofColor color = pix.getColor(x, y);
+
+        int lutPos [3];
+        for (int m=0; m<3; m++) {
+          lutPos[m] = color[m] / 8;
+          if (lutPos[m]==31) {
+            lutPos[m]=30;
+          }
+        }
+
+        ofVec3f start = lut[lutPos[0]][lutPos[1]][lutPos[2]];
+        ofVec3f end = lut[lutPos[0]+1][lutPos[1]+1][lutPos[2]+1];
+
+        for (int k=0; k<3; k++) {
+          float amount = (color[k] % 8) / 8.0f;
+          color[k]= (start[k] + amount * (end[k] - start[k])) * 255;
+        }
+
+        lutImg.setColor(x, y, color);
+
+      }
+    }
+
+    lutImg.update();
+  }
+}
+
+void ofApp::handleOpen(){
+  videoPlayer.setVolume(0);
+  videoPlayer.setLoopState(OF_LOOP_NORMAL);
+  videoPlayer.play();
 }
 
 //--------------------------------------------------------------
