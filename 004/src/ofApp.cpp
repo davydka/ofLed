@@ -95,7 +95,7 @@ void ofApp::setup() {
 void ofApp::update(){
   temp++;
 
-  if( cNote == 0 ) {
+  if( cNote == 0 || cNote == 1) {
     videoPlayer.update();
     if (videoPlayer.isFrameNew()){
       if (doLUT) {
