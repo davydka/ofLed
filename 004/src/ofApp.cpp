@@ -139,11 +139,11 @@ void ofApp::draw(){
     // ofSetColor(0,60,255);
     // ofDrawRectangle(0,0,16,16);
 
-    if(videoPlayer.isLoaded()){
+    // if(videoPlayer.isLoaded()){
       /* LUT */
       if(doLUT)
         lutImg.draw(0,0,16,16);
-    }
+    // }
 
     if(indexInt == 3) {
       ofSetColor(0, 0, 0);
