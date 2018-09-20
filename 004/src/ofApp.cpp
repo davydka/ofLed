@@ -135,15 +135,12 @@ void ofApp::draw(){
   ofRotateZDeg(rot);
   ofTranslate(-8, -8);
 
-  if( cNote == 0 ) {
-    // ofSetColor(0,60,255);
-    // ofDrawRectangle(0,0,16,16);
-
-    // if(videoPlayer.isLoaded()){
+  if( cNote == 0 || cNote == 1 ) {
+    if(videoPlayer.isLoaded()){
       /* LUT */
       if(doLUT)
         lutImg.draw(0,0,16,16);
-    // }
+    }
 
     if(indexInt == 3) {
       ofSetColor(0, 0, 0);
@@ -187,14 +184,6 @@ void ofApp::newMidiMessage(ofxMidiMessage& msg) {
 
 //--------------------------------------------------------------
 void ofApp::handleNote(int note) {
-  if( note == cNote ) {
-    cout << "same" << endl;
-    // return;
-  }
-  if( note != cNote ) {
-    cout << "not same" << endl;
-    // return;
-  }
   if( note != cNote && note == 0 ) {
     cout << "00" << endl;
     videoPlayer.load("00.mp4");
