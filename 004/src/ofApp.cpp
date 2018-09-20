@@ -78,15 +78,17 @@ void ofApp::setup() {
 void ofApp::update(){
   temp++;
 
-  for(int i=0; i < stars.size(); i++) {
-    stars[i].z = stars[i].z - .22;
-    stars[i].w = stars[i].z;
-
-    if(stars[i].z < 1) {
-      stars[i].x = ofRandom(-stripWidth, stripWidth);
-      stars[i].y = ofRandom(-rowHeight, rowHeight);
-      stars[i].z = ofRandom(0, stripWidth);
+  if( cNote == 100) {
+    for(int i=0; i < stars.size(); i++) {
+      stars[i].z = stars[i].z - .22;
       stars[i].w = stars[i].z;
+
+      if(stars[i].z < 1) {
+        stars[i].x = ofRandom(-stripWidth, stripWidth);
+        stars[i].y = ofRandom(-rowHeight, rowHeight);
+        stars[i].z = ofRandom(0, stripWidth);
+        stars[i].w = stars[i].z;
+      }
     }
   }
 
@@ -99,14 +101,30 @@ void ofApp::draw(){
   ofClear(0,0,0);                             // refreshes fbo, removes artifacts
   ofSetColor(255);
 
-  ofPushMatrix();
-  ofTranslate( stripWidth / 2.f, rowHeight / 2.f );
-  for(int i=0; i < stars.size(); i++) {
-    star(stars[i].x, stars[i].y, stars[i].z, stars[i].w);
-  }
-  ofPopMatrix();
-  fbo.end();
+  if( cNote == 0 ) {
+    ofSetColor(0,60,255);
+    ofDrawRectangle(0,0,16,16);
 
+    if(indexInt == 3) {
+      ofSetColor(0, 0, 0);
+      ofDrawRectangle(8, 3, 1, 1);
+    }
+    if(indexInt == 4) {
+      ofSetColor(0, 0, 0);
+      ofDrawRectangle(14, 7, 1, 1);
+    }
+  }
+
+  if( cNote == 100) {
+    ofPushMatrix();
+    ofTranslate( stripWidth / 2.f, rowHeight / 2.f );
+    for(int i=0; i < stars.size(); i++) {
+      star(stars[i].x, stars[i].y, stars[i].z, stars[i].w);
+    }
+    ofPopMatrix();
+  }
+
+  fbo.end();
   fbo.readToPixels(teensy.pixels1);           // send fbo pixels to teensy
   // fbo.draw(0, 0);
   teensy.draw(32,32);
