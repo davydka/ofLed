@@ -116,7 +116,7 @@ void ofApp::draw(){
         ofDrawRectangle(x,y,1,1);
       }
     }
-    dd = ofMap(temp, 0, 960, 0, 8);
+    dd = ofMap(temp, 0, 200, 0, 8);
     ofSetRectMode(OF_RECTMODE_CENTER);
     ofSetColor(0,64,32);
     ofDrawRectangle(8,8,dd,dd);
