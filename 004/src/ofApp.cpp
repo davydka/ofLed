@@ -194,6 +194,10 @@ void ofApp::handleNote(int note) {
   cout << temp << endl;
   cout << note << endl;
   temp = 0;
+
+  if( cNote == 0 ) {
+    videoPlayer.setFrame(0);
+  }
 }
 
 //--------------------------------------------------------------
