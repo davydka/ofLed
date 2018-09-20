@@ -188,6 +188,11 @@ void ofApp::newMidiMessage(ofxMidiMessage& msg) {
 //--------------------------------------------------------------
 void ofApp::handleNote(int note) {
   if( note == cNote ) {
+    cout << "same" << endl;
+    // return;
+  }
+  if( note != cNote ) {
+    cout << "not same" << endl;
     // return;
   }
   if( note != cNote && note == 0 ) {
@@ -202,11 +207,11 @@ void ofApp::handleNote(int note) {
   }
 
   cNote = note;
-  cout << temp << endl;
-  cout << note << endl;
+  // cout << temp << endl;
+  // cout << note << endl;
   temp = 0;
 
-  if( cNote == 0 ) {
+  if( cNote == 0 || cNote == 1 ) {
     videoPlayer.setFrame(0);
   }
 }
