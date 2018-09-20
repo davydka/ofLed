@@ -5,7 +5,7 @@ string MIDIPORT;
 string ROT;
 string FLIP;
 int rot = 0;
-int cNote = 0; // current note
+int cNote = 100; // current note
 int flip = 0;
 float temp = 0;
 
@@ -73,7 +73,7 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update(){
-  if( cNote == 0) {
+  if( cNote == 100) {
     for(int i=0; i < stars.size(); i++) {
       stars[i].z = stars[i].z - .1;
 
@@ -106,7 +106,7 @@ void ofApp::draw(){
   ofSetColor(255,0,15);
   // ofDrawRectangle(temp,0,1,1);
 
-  if( cNote == 0) {
+  if( cNote == 100) {
     for(int x=4; x<12; x++) {
       for(int y=4; y<12; y++) {
         ofSetColor(
