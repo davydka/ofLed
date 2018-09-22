@@ -152,6 +152,7 @@ void ofApp::draw(){
     if(indexInt == 3) {
       ofSetColor(0, 0, 0);
       ofDrawRectangle(8, 3, 1, 1);
+      ofDrawRectangle(8, 3, 4, 4);
     }
     if(indexInt == 4) {
       ofSetColor(0, 0, 0);
