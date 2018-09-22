@@ -207,6 +207,14 @@ void ofApp::handleNote(int note) {
     videoPlayer.load("03.mp4");
     handleOpen();
   }
+  if( note != cNote && note == 4 ) {
+    videoPlayer.load("04.mp4");
+    handleOpen();
+  }
+  if( note != cNote && note == 5 ) {
+    videoPlayer.load("05.mp4");
+    handleOpen();
+  }
 
   cNote = note;
   // cout << temp << endl;
