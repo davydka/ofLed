@@ -139,6 +139,21 @@ void ofApp::draw(){
     }
   }
 
+  if( cNote != 100 ) {
+     if(indexInt == 3) {
+      ofSetColor(0, 0, 0);
+
+      ofDrawRectangle(8, 3, 1, 1);
+
+      // ofDrawRectangle(8, 2, 1, 1);
+      ofDrawRectangle(9, 3, 1, 1);
+    }
+    if(indexInt == 4) {
+      ofSetColor(0, 0, 0);
+      ofDrawRectangle(14, 7, 1, 1);
+    }
+  }
+
   if( cNote == 100) {
     for(int x=4; x<12; x++) {
       for(int y=4; y<12; y++) {
