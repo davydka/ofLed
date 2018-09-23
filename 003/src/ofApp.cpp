@@ -113,7 +113,7 @@ void ofApp::draw(){
       ofFill();
       ofSetPolyMode(OF_POLY_WINDING_ODD);
       ofBeginShape();
-      float angleStep = TWO_PI/(10.0f + sin(temp/150.0f) * 60);
+      float angleStep = TWO_PI/(10.0f + sin(temp/75.0f) * 60);
       float radiusAdder = 0.5f;
       float radius = 0;
       for (int i = 0; i < 20; i++){
