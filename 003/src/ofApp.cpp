@@ -6,9 +6,16 @@ string ROT;
 string FLIP;
 int indexInt = 0;
 int rot = 0;
-int cNote = 1; // current note
+int cNote = 2; // current note
 int flip = 0;
 float temp = 0;
+
+float aa = 0;
+bool aab = true;
+float ss = 0;
+bool ssb = true;
+float dd = 0;
+bool ddb = true;
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -72,6 +79,10 @@ void ofApp::setup() {
     stars[i].z = ofRandom(0, stripWidth);
     stars[i].w = stars[i].z;
   }
+
+  aa = ofRandom(0, 110);
+  ss = ofRandom(0, 120);
+  dd = ofRandom(110, 255);
 }
 
 //--------------------------------------------------------------
@@ -91,6 +102,46 @@ void ofApp::update(){
   }
 
   temp++;
+
+  if( cNote == 2 ) {
+    if(aa > 250) {
+      aab = false;
+    }
+    if(aa < 5) {
+      aab = true;
+    }
+    if(ss > 250) {
+      ssb = false;
+    }
+    if(ss < 5) {
+      ssb = true;
+    }
+    if(dd > 250) {
+      ddb = false;
+    }
+    if(dd < 5) {
+      ddb = true;
+    }
+
+    if( aab ) {
+      aa++;
+    }
+    if( !aab ) {
+      aa--;
+    }
+    if( ssb ) {
+      ss++;
+    }
+    if( !ssb ) {
+      ss--;
+    }
+    if( ddb ) {
+      dd++;
+    }
+    if( !ddb ) {
+      dd--;
+    }
+  }
 
   teensy.update();                            // update our serial to teensy stuff
 }
@@ -155,6 +206,24 @@ void ofApp::draw(){
       ofPopMatrix();
 
     ofPopMatrix();
+  }
+
+  if( cNote == 2 ) {
+    ofSetColor(aa,ss,dd);
+    ofDrawCircle(8,4,4);
+
+    float zz = ofMap(temp, 0, 700, 10, 16);
+    ofSetColor(255, 32, 100);
+    ofSetPolyMode(OF_POLY_WINDING_ODD);	// this is the normal mode
+    ofBeginShape();
+
+      ofVertex(16,zz);
+      ofVertex(0,zz);
+      ofVertex(16,0);
+      ofVertex(8,16);
+      ofVertex(0,0);
+
+    ofEndShape(OF_CLOSE);
   }
 
   if( cNote != 100 ) {
