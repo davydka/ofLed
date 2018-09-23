@@ -361,7 +361,7 @@ void ofApp::draw(){
         ofTranslate( 8, 8 );
         ofScale(zz,zz,1);
         ofTranslate(-8,-8);
-        ofSetColor(aa/0.5, ss/0.5, dd);
+        ofSetColor(aa/0.5, ofRandom(2, 32), dd);
         // ofSetColor(ofRandom(255),ofRandom(255),255);
         ofDrawCircle(8,8,4);
       ofPopMatrix();
