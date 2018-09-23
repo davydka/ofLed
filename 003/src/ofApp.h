@@ -43,6 +43,7 @@ class ofApp : public ofBaseApp, public ofxMidiListener{
     //-----------------------------
     ofFbo fbo;
     ofFbo fdbk;
+    ofFbo fdbkX;
 
     // Graphic functions
     //-----------------------------

@@ -6,7 +6,7 @@ string ROT;
 string FLIP;
 int indexInt = 0;
 int rot = 0;
-int cNote = 5; // current note
+int cNote = 6; // current note
 int flip = 0;
 float temp = 0;
 
@@ -72,7 +72,14 @@ void ofApp::setup() {
 
   // allocate our pixels, fbo, and texture
   fbo.allocate(stripWidth, stripHeight*stripsPerPort*numPorts, GL_RGB);
-  fdbk.allocate(stripWidth, stripHeight*stripsPerPort*numPorts, GL_RGB);
+  fdbk.allocate(stripWidth, 16, GL_RGB);
+  fdbkX.allocate(stripWidth, stripHeight*stripsPerPort*numPorts, GL_RGB);
+  fdbk.begin();
+  ofClear(0,255);
+  fdbk.end();
+  fdbkX.begin();
+  ofClear(0,255);
+  fdbkX.end();
 
   stars.resize(80);
   for(int i=0; i < stars.size(); i++) {
@@ -105,7 +112,7 @@ void ofApp::update(){
 
   temp++;
 
-  if( cNote == 2  || cNote == 3 || cNote == 5 ) {
+  if( cNote == 2  || cNote == 3 || cNote == 5 || cNote == 6 ) {
     if(aa > 250) {
       aab = false;
     }
@@ -184,6 +191,29 @@ void ofApp::update(){
       dd--;
     }
   }
+
+  /*
+  if( cNote == 6 ) {
+    float zz = ofMap(temp, 0, 700, 1, 0);
+    fdbk.begin();
+    // ofSetColor(255);
+    fdbkX.draw(0,0,16,16);
+    //  glBlendFuncSeparate (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+      ofPushMatrix();
+        ofTranslate( 8, 8 );
+        ofScale(zz,zz,1);
+        ofTranslate(-8,-8);
+        ofSetColor(ofRandom(255),ofRandom(255),255);
+        ofDrawCircle(8,8,8);
+      ofPopMatrix();
+    fdbk.end();
+
+    fdbkX.begin();
+    // ofSetColor(255);
+    fdbk.draw(0,0);
+    fdbkX.end();
+  }
+  */
 
   teensy.update();                            // update our serial to teensy stuff
 }
@@ -320,6 +350,31 @@ void ofApp::draw(){
     ofDrawCircle(zz,8,6);
     ofDrawCircle(16-zz,8,6);
   }
+
+  if( cNote == 6 ) {
+    // fdbk.draw(0,0);
+    float zz = ofMap(temp, 0, 1400, 1, 0);
+    float xx = ofMap(temp, 0, 1400, 1, 2);
+    fdbk.begin();
+      // ofSetColor(255);
+      ofPushMatrix();
+        ofTranslate( 8, 8 );
+        ofScale(zz,zz,1);
+        ofTranslate(-8,-8);
+        ofSetColor(ofRandom(255),ofRandom(255),255);
+        ofDrawCircle(8,8,8);
+      ofPopMatrix();
+    fdbk.end();
+
+    ofPushMatrix();
+      ofTranslate( 8, 8 );
+      ofScale(xx,xx,1);
+      ofTranslate(-8,-8);
+
+      fdbk.draw(0,0,16,16);
+    ofPopMatrix();
+  }
+
 
   if( cNote != 100 ) {
      if(indexInt == 3) {
