@@ -1,5 +1,7 @@
 #include "ofApp.h"
 
+ofIcoSpherePrimitive icoSphere;
+
 string INDEX;
 string MIDIPORT;
 string ROT;
@@ -147,11 +149,11 @@ void ofApp::draw(){
     ofDrawCircle(8,8,dd);
 
     if( cNote == 4) {
-      ofSetColor(255,32,32);
-      ofDrawCircle(2,2,dd);
-      ofDrawCircle(14,2,dd);
-      ofDrawCircle(2,14,dd);
-      ofDrawCircle(14,14,dd);
+      ofSetColor(255,64,32);
+      ofDrawCircle(2,2,aa);
+      ofDrawCircle(14,2,aa);
+      ofDrawCircle(2,14,aa);
+      ofDrawCircle(14,14,aa);
     }
   }
 
