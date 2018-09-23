@@ -128,6 +128,7 @@ void ofApp::draw(){
   }
 
   if( cNote == 1 ) {
+    float zz = ofMap(temp, 0, 700, 0, 1);
     ofSetColor(255, 100, 32);
     ofDrawTriangle(0,16, 8,0, 16,16);
 
@@ -144,6 +145,15 @@ void ofApp::draw(){
 
 
       ofEndShape(OF_CLOSE);
+      ofPushMatrix();
+        ofTranslate( 8, 8 );
+        ofScale(zz,zz,1);
+        ofTranslate(-8,-8);
+
+        ofSetColor(0, 0, 0);
+        ofDrawTriangle(0,0, 8,16, 16,0);
+      ofPopMatrix();
+
     ofPopMatrix();
   }
 
