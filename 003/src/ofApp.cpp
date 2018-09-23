@@ -98,7 +98,7 @@ void ofApp::setup() {
 void ofApp::update(){
   if( cNote == 100) {
     for(int i=0; i < stars.size(); i++) {
-      stars[i].z = stars[i].z - .3;
+      stars[i].z = stars[i].z - .2;
       stars[i].w = stars[i].z;
 
       if(stars[i].z < 1) {
@@ -412,7 +412,7 @@ void ofApp::draw(){
 }
 
 void ofApp::star(float x, float y, float z, float w) {
-  ofSetColor(255,255,0);
+  ofSetColor(255,192,32);
   ofFill();
 
   float sx = ofMap(x / z, 0, 1, 0, stripWidth);
