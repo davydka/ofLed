@@ -6,7 +6,7 @@ string ROT;
 string FLIP;
 int indexInt = 0;
 int rot = 0;
-int cNote = 4; // current note
+int cNote = 5; // current note
 int flip = 0;
 float temp = 0;
 
@@ -105,7 +105,7 @@ void ofApp::update(){
 
   temp++;
 
-  if( cNote == 2  || cNote == 3 ) {
+  if( cNote == 2  || cNote == 3 || cNote == 5 ) {
     if(aa > 250) {
       aab = false;
     }
@@ -308,6 +308,17 @@ void ofApp::draw(){
       ofPopMatrix();
 
     ofPopMatrix();
+  }
+
+  if( cNote == 5 ) {
+    ofSetColor(aa,ss,dd);
+    ofDrawRectangle(0,0,16,16);
+
+    float zz = ofMap(temp, 0, 700, -6, 12);
+    // float xx = ofMap(temp, 0, 700, 8, -8);
+    ofSetColor(0,0,0);
+    ofDrawCircle(zz,8,6);
+    ofDrawCircle(16-zz,8,6);
   }
 
   if( cNote != 100 ) {
