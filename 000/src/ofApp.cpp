@@ -8,7 +8,7 @@ string ROT;
 string FLIP;
 int indexInt = 0;
 int rot = 0;
-int cNote = 4; // current note
+int cNote = 5; // current note
 int flip = 0;
 float temp = 0;
 
@@ -198,6 +198,18 @@ void ofApp::draw(){
     ofSetColor(192,128,32);
     ofDrawCircle(8,8,dd);
   }
+
+  if( cNote == 5 ) {
+    aa = ofMap(temp, 0, 400, 0, 0.5);
+    ss = ofMap(temp, 0, 400, 0, 32);
+    icoSphere.setRadius( ss );
+    ofSetColor(0, 128, 255);
+    icoSphere.setResolution(1);
+    icoSphere.setPosition(8,8,0);
+    icoSphere.rotateDeg(aa, 1.0, 0.0, 0.0);
+    icoSphere.draw(OF_MESH_WIREFRAME);
+  }
+
   if( cNote != 100 ) {
      if(indexInt == 3) {
       ofSetColor(0, 0, 0);
