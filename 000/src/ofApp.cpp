@@ -4,6 +4,7 @@ string INDEX;
 string MIDIPORT;
 string ROT;
 string FLIP;
+int indexInt = 0;
 int rot = 0;
 int cNote = 1; // current note
 int flip = 0;
@@ -26,6 +27,7 @@ void ofApp::setup() {
   MIDIPORT = ofGetEnv("MIDIPORT");
   ROT = ofGetEnv("ROT");
   FLIP = ofGetEnv("FLIP");
+  indexInt = ofToInt(INDEX);
   rot = ofToInt(ROT);
   flip = ofToInt(FLIP);
   cout << "pifull INDEX: " << INDEX << endl;
