@@ -139,6 +139,12 @@ void ofApp::draw(){
         ofDrawRectangle(x,y,1,1);
       }
     }
+    dd = 0;
+    if( aa < 1 ) {
+      dd = ofMap(temp, 0, 600, 0, 8);
+    }
+    ofSetColor(255,64,32);
+    ofDrawCircle(8,8,dd);
   }
 
   if( cNote != 100 ) {
@@ -148,7 +154,7 @@ void ofApp::draw(){
       ofDrawRectangle(8, 3, 1, 1);
 
       // ofDrawRectangle(8, 2, 1, 1);
-      ofDrawRectangle(9, 3, 1, 1);
+      // ofDrawRectangle(9, 3, 1, 1);
     }
     if(indexInt == 4) {
       ofSetColor(0, 0, 0);
