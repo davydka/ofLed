@@ -363,7 +363,7 @@ void ofApp::draw(){
         ofTranslate(-8,-8);
         ofSetColor(aa/0.5,ss,dd);
         // ofSetColor(ofRandom(255),ofRandom(255),255);
-        ofDrawCircle(8,8,6);
+        ofDrawCircle(8,8,4);
       ofPopMatrix();
     fdbk.end();
 
