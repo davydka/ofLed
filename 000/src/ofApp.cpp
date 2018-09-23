@@ -246,7 +246,7 @@ void ofApp::draw(){
   }
 
   if( cNote == 7 ) {
-    aa = ofMap(temp, 0, 400, 0, 2.0);
+    aa = ofMap(temp, 0, 400, 0, 4.0);
     // aa = 0;
     // ss = ofMap(temp, 0, 400, 24, 32);
     ss = 24;
@@ -254,7 +254,7 @@ void ofApp::draw(){
     ofSetColor(192, 192, 0);
     icoSphere.setResolution(1);
     icoSphere.setPosition(8,8,0);
-    icoSphere.rotateDeg(aa, 1.0, 0.0, 0.0);
+    icoSphere.rotateDeg(temp/100.0, 1.0, 0.0, 0.0);
     icoSphere.draw(OF_MESH_WIREFRAME);
   }
 
