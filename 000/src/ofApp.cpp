@@ -5,10 +5,12 @@ string MIDIPORT;
 string ROT;
 string FLIP;
 int rot = 0;
-int cNote = 100; // current note
+int cNote = 1; // current note
 int flip = 0;
 float temp = 0;
 
+float aa = 0;
+float ss = 0;
 float dd = 0;
 
 //--------------------------------------------------------------
@@ -122,13 +124,15 @@ void ofApp::draw(){
     ofDrawRectangle(8,8,dd,dd);
   }
 
-  if( cNote != 0 && cNote != 100) {
-    for(int x=4; x<12; x++) {
-      for(int y=4; y<12; y++) {
+  if( cNote == 1 ) {
+    aa = ofMap(temp, 0, 200, 4, 0);
+    ss = ofMap(temp, 0, 200, 12, 16);
+    for(int x=aa; x<ss; x++) {
+      for(int y=aa; y<ss; y++) {
         ofSetColor(
+          ofRandom(1,4),
           ofRandom(1,32),
-          ofRandom(1,32),
-          ofRandom(1,32)
+          ofRandom(1,64)
         );
         ofDrawRectangle(x,y,1,1);
       }
