@@ -6,7 +6,7 @@ string ROT;
 string FLIP;
 int indexInt = 0;
 int rot = 0;
-int cNote = 2; // current note
+int cNote = 3; // current note
 int flip = 0;
 float temp = 0;
 
@@ -103,7 +103,7 @@ void ofApp::update(){
 
   temp++;
 
-  if( cNote == 2 ) {
+  if( cNote == 2  || cNote == 3 ) {
     if(aa > 250) {
       aab = false;
     }
@@ -224,6 +224,15 @@ void ofApp::draw(){
       ofVertex(0,0);
 
     ofEndShape(OF_CLOSE);
+  }
+
+  if( cNote == 3 ) {
+    ofSetColor(aa,ss,dd);
+    ofDrawCircle(8,8,8);
+
+    float zz = ofMap(temp, 0, 700, 0, 16);
+    ofSetColor(0,0,0);
+    ofDrawCircle(zz,8,8);
   }
 
   if( cNote != 100 ) {
