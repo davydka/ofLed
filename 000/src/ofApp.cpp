@@ -8,7 +8,7 @@ string ROT;
 string FLIP;
 int indexInt = 0;
 int rot = 0;
-int cNote = 7; // current note
+int cNote = 100; // current note
 int flip = 0;
 float temp = 0;
 
