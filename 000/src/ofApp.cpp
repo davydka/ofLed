@@ -6,7 +6,7 @@ string ROT;
 string FLIP;
 int indexInt = 0;
 int rot = 0;
-int cNote = 2; // current note
+int cNote = 3; // current note
 int flip = 0;
 float temp = 0;
 
@@ -173,6 +173,21 @@ void ofApp::draw(){
     ofDrawCircle(8,8,dd);
   }
 
+  if( cNote == 3 ) {
+    ofSetColor(96,192,32);
+    ofDrawCircle(8,8,8);
+
+    aa = ofMap(temp, 0, 200, 0, 16);
+    ss = ofMap(temp, 0, 400, 0, 16);
+    dd = ofMap(temp, 0, 600, 0, 16);
+
+    ofSetColor(192,64,128);
+    ofDrawCircle(8,8,aa);
+    ofSetColor(32,64,128);
+    ofDrawCircle(8,8,ss);
+    ofSetColor(192,128,32);
+    ofDrawCircle(8,8,dd);
+  }
   if( cNote != 100 ) {
      if(indexInt == 3) {
       ofSetColor(0, 0, 0);
