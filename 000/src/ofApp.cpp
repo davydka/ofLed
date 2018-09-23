@@ -8,13 +8,18 @@ string ROT;
 string FLIP;
 int indexInt = 0;
 int rot = 0;
-int cNote = 5; // current note
+int cNote = 6; // current note
 int flip = 0;
 float temp = 0;
 
 float aa = 0;
 float ss = 0;
 float dd = 0;
+float ff = 0;
+float gg = 0;
+float hh = 0;
+float jj = 0;
+float kk = 0;
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -203,11 +208,41 @@ void ofApp::draw(){
     aa = ofMap(temp, 0, 400, 0, 0.5);
     ss = ofMap(temp, 0, 400, 0, 32);
     icoSphere.setRadius( ss );
-    ofSetColor(0, 255, 192);
+    ofSetColor(0, 255, 128);
     icoSphere.setResolution(1);
     icoSphere.setPosition(8,8,0);
     icoSphere.rotateDeg(aa, 1.0, 0.0, 0.0);
     icoSphere.draw(OF_MESH_WIREFRAME);
+  }
+
+  if( cNote == 6 ) {
+    aa = ofMap(temp, 0, 400, 0, 0.25);
+    ss = ofMap(temp, 0, 400, 0, 32);
+    icoSphere.setRadius( ss );
+    ofSetColor(0, 128, 192);
+    icoSphere.setResolution(1);
+    icoSphere.setPosition(8,8,0);
+    icoSphere.rotateDeg(aa, 1.0, 0.0, 0.0);
+    icoSphere.draw(OF_MESH_WIREFRAME);
+
+    dd = ofMap(temp, 0, 400, 0, 8);
+    ff = ofMap(temp, 0, 600, 0, 8);
+    gg = ofMap(temp, 0, 800, 0, 8);
+    hh = ofMap(temp, 0, 1000, 0, 8);
+    jj = ofMap(temp, 0, 1200, 0, 8);
+    kk = ofMap(temp, 0, 1400, 0, 8);
+    ofSetColor(192,32,32);
+    ofDrawCircle(8,8,dd);
+    ofSetColor(32,64,16);
+    ofDrawCircle(8,8,ff);
+    ofSetColor(128,8,32);
+    ofDrawCircle(8,8,gg);
+    ofSetColor(16,192,32);
+    ofDrawCircle(8,8,hh);
+    ofSetColor(16,16,192);
+    ofDrawCircle(8,8,jj);
+    ofSetColor(192,64,16);
+    ofDrawCircle(8,8,kk);
   }
 
   if( cNote != 100 ) {
