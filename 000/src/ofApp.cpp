@@ -147,7 +147,7 @@ void ofApp::draw(){
     ofDrawCircle(8,8,dd);
 
     if( cNote == 4) {
-      ofSetColor(0,222,32);
+      ofSetColor(255,32,16);
       ofDrawCircle(2,2,2);
       ofDrawCircle(14,2,2);
       ofDrawCircle(2,14,2);
