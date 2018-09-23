@@ -106,7 +106,7 @@ void ofApp::draw(){
   ofRotateZDeg(rot);
   ofTranslate(-8, -8);
 
-  if( cNote == 1 ) {
+  if( cNote == 0 ) {
     ofPushMatrix();
       ofTranslate(8,8,0);
       ofSetColor(255, 100, 32);
