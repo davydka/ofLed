@@ -203,7 +203,7 @@ void ofApp::draw(){
     aa = ofMap(temp, 0, 400, 0, 0.5);
     ss = ofMap(temp, 0, 400, 0, 32);
     icoSphere.setRadius( ss );
-    ofSetColor(0, 255, 255);
+    ofSetColor(0, 255, 192);
     icoSphere.setResolution(1);
     icoSphere.setPosition(8,8,0);
     icoSphere.rotateDeg(aa, 1.0, 0.0, 0.0);
