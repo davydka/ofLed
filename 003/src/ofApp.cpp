@@ -6,7 +6,7 @@ string ROT;
 string FLIP;
 int indexInt = 0;
 int rot = 0;
-int cNote = 3; // current note
+int cNote = 4; // current note
 int flip = 0;
 float temp = 0;
 
@@ -16,6 +16,8 @@ float ss = 0;
 bool ssb = true;
 float dd = 0;
 bool ddb = true;
+
+
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -143,6 +145,46 @@ void ofApp::update(){
     }
   }
 
+  if( cNote == 4 ) {
+    if(aa > 16) {
+      aab = false;
+    }
+    if(aa < 0) {
+      aab = true;
+    }
+    if(ss > 16) {
+      ssb = false;
+    }
+    if(ss < 0) {
+      ssb = true;
+    }
+    if(dd > 16) {
+      ddb = false;
+    }
+    if(dd < 0) {
+      ddb = true;
+    }
+
+    if( aab ) {
+      aa++;
+    }
+    if( !aab ) {
+      aa--;
+    }
+    if( ssb ) {
+      ss++;
+    }
+    if( !ssb ) {
+      ss--;
+    }
+    if( ddb ) {
+      dd++;
+    }
+    if( !ddb ) {
+      dd--;
+    }
+  }
+
   teensy.update();                            // update our serial to teensy stuff
 }
 
@@ -235,6 +277,39 @@ void ofApp::draw(){
     ofDrawCircle(zz,8,8);
   }
 
+  if( cNote == 4 ) {
+    float zz = ofMap(temp, 0, 700, 0, 1);
+    ofSetColor(255, 100, 32);
+    ofDrawTriangle(0,16, 8,0, 16,16);
+
+    ofPushMatrix();
+      // ofTranslate(8,8,0);
+      ofSetColor(32, 100, 255);
+      ofFill();
+      ofSetPolyMode(OF_POLY_WINDING_ODD);
+      ofBeginShape();
+
+      for (int i = 0; i < 3; i++){
+        ofVertex(aa, ofRandom(0,16));
+      }
+      for (int i = 0; i < 3; i++){
+        ofVertex(ofRandom(0,16), ss);
+      }
+
+
+      ofEndShape(OF_CLOSE);
+      ofPushMatrix();
+        ofTranslate( 8, 8 );
+        ofScale(zz,zz,1);
+        ofTranslate(-8,-8);
+
+        ofSetColor(0, 32, 64);
+        ofDrawTriangle(0,0, 8,16, 16,0);
+      ofPopMatrix();
+
+    ofPopMatrix();
+  }
+
   if( cNote != 100 ) {
      if(indexInt == 3) {
       ofSetColor(0, 0, 0);
@@ -297,6 +372,11 @@ void ofApp::newMidiMessage(ofxMidiMessage& msg) {
 void ofApp::handleNote(int note) {
   if( note == cNote ) {
     // return;
+  }
+  if( note != cNote ) {
+    aa = ofRandom(0, 110);
+    ss = ofRandom(0, 120);
+    dd = ofRandom(110, 255);
   }
   cNote = note;
   cout << note << endl;
