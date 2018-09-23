@@ -246,7 +246,7 @@ void ofApp::draw(){
   }
 
   if( cNote == 7 ) {
-    aa = ofMap(temp, 0, 400, 0, 0.15);
+    aa = ofMap(temp, 0, 400, 0, 0.5);
     ss = ofMap(temp, 0, 400, 24, 32);
     icoSphere.setRadius( ss );
     ofSetColor(192, 192, 0);
