@@ -127,6 +127,26 @@ void ofApp::draw(){
     ofPopMatrix();
   }
 
+  if( cNote == 1 ) {
+    ofSetColor(255, 100, 32);
+    ofDrawTriangle(0,16, 8,0, 16,16);
+
+    ofPushMatrix();
+      // ofTranslate(8,8,0);
+      ofSetColor(32, 100, 255);
+      ofFill();
+      ofSetPolyMode(OF_POLY_WINDING_ODD);
+      ofBeginShape();
+
+      for (int i = 0; i < 10; i++){
+        ofVertex(ofRandom(0,16), ofRandom(0,16));
+      }
+
+
+      ofEndShape(OF_CLOSE);
+    ofPopMatrix();
+  }
+
   if( cNote != 100 ) {
      if(indexInt == 3) {
       ofSetColor(0, 0, 0);
