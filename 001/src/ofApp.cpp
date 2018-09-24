@@ -6,7 +6,7 @@ string ROT;
 string FLIP;
 int indexInt = 0;
 int rot = 0;
-int cNote = 3; // current note
+int cNote = 100; // current note
 int flip = 0;
 float temp = 0;
 
@@ -231,7 +231,7 @@ void ofApp::draw(){
     float qq = ofMap(sin(temp/172.0f), -1, 1, 1, 16);
 
     for (int i = 0; i < 16; i++){
-      ofSetColor(ofRandom(0,255),ofRandom(0,255),ofRandom(0,255));
+      ofSetColor(ofRandom(0,128),ofRandom(0,128),ofRandom(0,128));
       ofDrawRectangle(ofRandom(0,16),ofRandom(0,16),ofRandom(0,4),ofRandom(0,4));
     }
 
