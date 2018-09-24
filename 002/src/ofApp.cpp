@@ -265,18 +265,16 @@ void ofApp::draw(){
     float ee = ofMap(temp, 0, 2211, 0, 360);
     float rr = ofMap(sin(tempX/69.0f), -1, 1, 0, 192);
 
-    /*
     for(int x=0; x<16; x++) {
       for(int y=0; y<16; y++) {
         ofSetColor(
           ofRandom(1,8),
-          ofRandom(4,12),
-          ofRandom(1,32)
+          ofRandom(1,8),
+          ofRandom(1,16)
         );
         ofDrawRectangle(x,y,1,1);
       }
     }
-    */
 
     ofSetColor(48, 8, 16);
     ofDrawCircle(8,8,ww);
@@ -291,15 +289,6 @@ void ofApp::draw(){
     ofDrawLine(16,0,0,16);
     ofDrawLine(8,0,8,16);
     ofDrawLine(0,8,16,8);
-    /*
-    for(int x=0; x<16; x=x+4) {
-      for(int y=0; y<16; y=y+4) {
-        ofSetColor(ss,ofRandom(16, 96),dd, rr);
-        ofDrawLine(x,0,16-y,16);
-        // ofDrawLine(x,0,0,16);
-      }
-    }
-    */
     ofPopMatrix();
   }
 
