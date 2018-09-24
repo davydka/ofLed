@@ -263,7 +263,7 @@ void ofApp::draw(){
     float qq = ofMap(temp, 0, 2211, 0, 1440);
     float ww = ofMap(sin(tempX/138.0f), -1, 1, 1, 8);
     float ee = ofMap(temp, 0, 2211, 0, 360);
-    float rr = ofMap(sin(tempX/69.0f), -1, 1, 0, 64);
+    float rr = ofMap(sin(tempX/69.0f), -1, 1, 0, 192);
 
     /*
     for(int x=0; x<16; x++) {
