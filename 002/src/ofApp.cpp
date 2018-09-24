@@ -290,6 +290,7 @@ void ofApp::draw(){
     ofDrawLine(0,0,16,16);
     ofDrawLine(16,0,0,16);
     ofDrawLine(8,0,8,16);
+    ofDrawLine(0,8,16,8);
     /*
     for(int x=0; x<16; x=x+4) {
       for(int y=0; y<16; y=y+4) {
