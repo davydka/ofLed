@@ -263,7 +263,7 @@ void ofApp::draw(){
     float qq = ofMap(temp, 0, 2211, 0, 1440);
     float ww = ofMap(sin(tempX/138.0f), -1, 1, 1, 8);
     float ee = ofMap(temp, 0, 2211, 0, 360);
-    float rr = ofMap(sin(tempX/69.0f), -1, 1, 0, 64);
+    float rr = ofMap(sin(tempX/69.0f), -1, 1, 0, 48);
 
     for(int x=0; x<16; x++) {
       for(int y=0; y<16; y++) {
@@ -283,8 +283,8 @@ void ofApp::draw(){
     ofTranslate( stripWidth / 2.f, rowHeight / 2.f );
     ofRotateDeg(qq);
     ofTranslate( -stripWidth / 2.f, -rowHeight / 2.f );
-    for(int x=0; x<16; x=x+2) {
-      for(int y=0; y<16; y=y+2) {
+    for(int x=0; x<16; x=x+3) {
+      for(int y=0; y<16; y=y+3) {
         ofSetColor(ss,ofRandom(16, 96),dd, rr);
         ofDrawLine(x,0,16-y,16);
         // ofDrawLine(x,0,0,16);
