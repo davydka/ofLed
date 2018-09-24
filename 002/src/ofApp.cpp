@@ -165,14 +165,14 @@ void ofApp::draw(){
     
     float qq = ofMap(sin(temp/75.0f), -1, 1, 0, 16);
 
-    ofSetColor(32, 100, 255);
+    ofSetColor(24, 84, 224);
     ofBeginShape();
       ofVertex(0, 0);
       ofVertex(0, qq);
       ofVertex(16, 16);
     ofEndShape(OF_CLOSE);
 
-    ofSetColor(255, 100, 32);
+    ofSetColor(224, 84, 24);
     ofBeginShape();
       ofVertex(0, 0);
       ofVertex(qq, 0);
@@ -188,14 +188,14 @@ void ofApp::draw(){
     float qq = ofMap(sin(tempX/69.0f), -1, 1, 0, 16);
     float ww = ofMap(sin(tempX/138.0f), -1, 1, 1, 8);
 
-    ofSetColor(32, 100, 255);
+    ofSetColor(24, 184, 224);
     ofBeginShape();
       ofVertex(0, 0);
       ofVertex(0, qq);
       ofVertex(16, 16);
     ofEndShape(OF_CLOSE);
 
-    ofSetColor(255, 100, 32);
+    ofSetColor(224, 84, 24);
     ofBeginShape();
       ofVertex(0, 0);
       ofVertex(qq, 0);
@@ -222,14 +222,14 @@ void ofApp::draw(){
     ofRotateDeg(tt);
     ofTranslate( -stripWidth / 2.f, -rowHeight / 2.f );
 
-    ofSetColor(32, 84, 240);
+    ofSetColor(24, 68, 208);
     ofBeginShape();
       ofVertex(0, 0);
       ofVertex(0, qq);
       ofVertex(16, 16);
     ofEndShape(OF_CLOSE);
 
-    ofSetColor(240, 84, 32);
+    ofSetColor(208, 68, 24);
     ofBeginShape();
       ofVertex(0, 0);
       ofVertex(qq, 0);
