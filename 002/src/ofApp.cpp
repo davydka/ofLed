@@ -285,6 +285,11 @@ void ofApp::draw(){
     ofTranslate( stripWidth / 2.f, rowHeight / 2.f );
     ofRotateDeg(qq);
     ofTranslate( -stripWidth / 2.f, -rowHeight / 2.f );
+
+    ofSetColor(ss,ofRandom(16, 96),dd, rr);
+    ofDrawLine(0,0,16,16);
+    ofDrawLine(0,16,0,16);
+    /*
     for(int x=0; x<16; x=x+4) {
       for(int y=0; y<16; y=y+4) {
         ofSetColor(ss,ofRandom(16, 96),dd, rr);
@@ -292,6 +297,7 @@ void ofApp::draw(){
         // ofDrawLine(x,0,0,16);
       }
     }
+    */
     ofPopMatrix();
   }
 
