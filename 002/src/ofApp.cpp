@@ -265,8 +265,8 @@ void ofApp::draw(){
     float ee = ofMap(temp, 0, 2211, 0, 360);
     float rr = ofMap(sin(tempX/69.0f), -1, 1, 0, 192);
 
-    for(int x=0; x<16; x++) {
-      for(int y=0; y<16; y++) {
+    for(int x=4; x<12; x++) {
+      for(int y=4; y<12; y++) {
         ofSetColor(
           ofRandom(1,8),
           ofRandom(1,8),
