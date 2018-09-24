@@ -265,6 +265,7 @@ void ofApp::draw(){
     float ee = ofMap(temp, 0, 2211, 0, 360);
     float rr = ofMap(sin(tempX/69.0f), -1, 1, 0, 64);
 
+    /*
     for(int x=0; x<16; x++) {
       for(int y=0; y<16; y++) {
         ofSetColor(
@@ -275,6 +276,7 @@ void ofApp::draw(){
         ofDrawRectangle(x,y,1,1);
       }
     }
+    */
 
     ofSetColor(48, 8, 16);
     ofDrawCircle(8,8,ww);
