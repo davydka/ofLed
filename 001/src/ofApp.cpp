@@ -202,6 +202,11 @@ void ofApp::update(){
         img.setFromPixels(pix);
         img.resize(16,16);
         applyLUT(img.getPixels());
+
+        pix = lutImg.getPixels();
+        img.setFromPixels(pix);
+        img.resize(16,16);
+        applyLUT(img.getPixels());
       }
     }
   }
@@ -231,7 +236,7 @@ void ofApp::draw(){
     float qq = ofMap(sin(temp/172.0f), -1, 1, 1, 16);
 
     for (int i = 0; i < 16; i++){
-      ofSetColor(ofRandom(0,128),ofRandom(0,128),ofRandom(0,128));
+      ofSetColor(ofRandom(0,100),ofRandom(0,100),ofRandom(0,100));
       ofDrawRectangle(ofRandom(0,16),ofRandom(0,16),ofRandom(0,4),ofRandom(0,4));
     }
 
