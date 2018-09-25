@@ -6,7 +6,7 @@ string ROT;
 string FLIP;
 int indexInt = 0;
 int rot = 0;
-int cNote = 4; // current note
+int cNote = 5; // current note
 int flip = 0;
 float temp = 0;
 
@@ -146,7 +146,7 @@ void ofApp::update(){
     }
   }
 
-  if( cNote == 0 ) {
+  if( cNote == 0 || cNote == 5 ) {
     for(int i=0; i < stars2.size(); i++) {
       stars2[i].x = stars2[i].x + .1;
       stars2[i].y = stars2[i].y + .5;
@@ -303,6 +303,37 @@ void ofApp::draw(){
   }
 
   if( cNote == 5 ) {
+    float qq = ofMap(sin(temp/118.0f), -1, 1, 0, 360);
+
+    float x0 = 0;
+    float y0 = 8;
+
+    float x1 = 4;
+    float y1 = 8+8*sin(temp/28.0f);
+    float x2 = 12;
+    float y2 = 8+8*sin(temp/14.0f);
+
+    float x3 = 16;
+    float y3 = 8;
+
+    for(int i=0; i < stars2.size(); i++) {
+      ofSetColor(76,32,76);
+      ofDrawCircle(stars2[i].x, stars2[i].y, 1);
+    }
+
+    ofPushMatrix();
+      ofTranslate(8, 8);
+      ofRotateZDeg(qq);
+      ofTranslate(-8, -8);
+
+      ofFill();
+      ofSetColor(255, 64, 32);
+      ofBeginShape();
+      ofVertex(x0,y0);
+      ofBezierVertex(x1,y1,x2,y2,x3,y3);
+      ofEndShape();
+      ofDrawLine(0,8,19,8);
+    ofPopMatrix();
   }
 
   if( cNote != 100) {
