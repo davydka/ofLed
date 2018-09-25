@@ -96,6 +96,10 @@ void ofApp::setup() {
 
   lutImg.allocate(16, 16, OF_IMAGE_COLOR);
 
+  aa = ofRandom(5, 250);
+  ss = ofRandom(5, 250);
+  dd = ofRandom(5, 250);
+
 }
 
 //--------------------------------------------------------------
