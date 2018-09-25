@@ -6,7 +6,7 @@ string ROT;
 string FLIP;
 int indexInt = 0;
 int rot = 0;
-int cNote = 1; // current note
+int cNote = 2; // current note
 int flip = 0;
 float temp = 0;
 
@@ -86,7 +86,7 @@ void ofApp::setup() {
   }
 
   aa = ofRandom(5, 250);
-  ss = ofRandom(5, 250);
+  ss = ofRandom(5, 150);
   dd = ofRandom(5, 250);
 }
 
@@ -99,7 +99,7 @@ void ofApp::update(){
     if(aa < 5) {
       aab = true;
     }
-    if(ss > 250) {
+    if(ss > 150) {
       ssb = false;
     }
     if(ss < 5) {
@@ -224,6 +224,20 @@ void ofApp::draw(){
   }
 
   if( cNote == 2 ) {
+    float qq = ofMap(sin(temp/118.0f), -1, 1, 0, 16);
+    ofSetColor(aa, ss, dd);
+
+    ofDrawLine(0,0,  8,qq);
+    ofDrawLine(0,4,  8,qq);
+    ofDrawLine(0,8,  8,qq);
+    ofDrawLine(0,12, 8,qq);
+    ofDrawLine(0,16, 8,qq);
+
+    ofDrawLine(16,0,  8,qq);
+    ofDrawLine(16,4,  8,qq);
+    ofDrawLine(16,8,  8,qq);
+    ofDrawLine(16,12, 8,qq);
+    ofDrawLine(16,16, 8,qq);
   }
 
   if( cNote == 3 ) {
