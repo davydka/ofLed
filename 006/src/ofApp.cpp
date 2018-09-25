@@ -6,7 +6,7 @@ string ROT;
 string FLIP;
 int indexInt = 0;
 int rot = 0;
-int cNote = 0; // current note
+int cNote = 1; // current note
 int flip = 0;
 float temp = 0;
 
@@ -84,10 +84,54 @@ void ofApp::setup() {
     stars2[i].x = ofRandom(0, stripWidth);
     stars2[i].y = ofRandom(0, rowHeight);
   }
+
+  aa = ofRandom(5, 250);
+  ss = ofRandom(5, 250);
+  dd = ofRandom(5, 250);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+  if( cNote != 100 ) {
+    if(aa > 250) {
+      aab = false;
+    }
+    if(aa < 5) {
+      aab = true;
+    }
+    if(ss > 250) {
+      ssb = false;
+    }
+    if(ss < 5) {
+      ssb = true;
+    }
+    if(dd > 250) {
+      ddb = false;
+    }
+    if(dd < 5) {
+      ddb = true;
+    }
+
+    if( aab ) {
+      aa++;
+    }
+    if( !aab ) {
+      aa--;
+    }
+    if( ssb ) {
+      ss++;
+    }
+    if( !ssb ) {
+      ss--;
+    }
+    if( ddb ) {
+      dd++;
+    }
+    if( !ddb ) {
+      dd--;
+    }
+  }
+
   if( cNote == 100) {
     for(int i=0; i < stars.size(); i++) {
       stars[i].z = stars[i].z - .5;
@@ -108,6 +152,23 @@ void ofApp::update(){
       stars2[i].y = stars2[i].y + .5;
 
       if(stars2[i].y > 16) {
+        stars2[i].x = ofRandom(0, 16);
+        stars2[i].y = ofRandom(0, -4);
+      }
+    }
+  }
+
+  if( cNote == 1 ) {
+    for(int i=0; i < stars2.size(); i++) {
+      if( stars2[i].x < 8 ) {
+        stars2[i].x = stars2[i].x - .2;
+      }
+      if( stars2[i].x >= 8 ) {
+        stars2[i].x = stars2[i].x + .2;
+      }
+      stars2[i].y = stars2[i].y + .5;
+
+      if( stars2[i].y > 16 || stars2[i].x < 0 || stars2[i].x > 16 ) {
         stars2[i].x = ofRandom(0, 16);
         stars2[i].y = ofRandom(0, -4);
       }
@@ -143,14 +204,34 @@ void ofApp::draw(){
     ofSetColor(0);
     ofDrawCircle(qq, 4, 4);
   }
+
   if( cNote == 1 ) {
+    float qq = ofMap(sin(temp/118.0f), -1, 1, 0, 720);
+
+    for(int i=0; i < stars2.size(); i++) {
+      ofSetColor(108,108,108);
+      ofDrawCircle(stars2[i].x, stars2[i].y, 1);
+    }
+
+    ofPushMatrix();
+      ofTranslate(8, 10);
+      ofRotateZDeg(qq);
+      ofTranslate(-8, -10);
+
+      ofSetColor(aa, ss, dd);
+      ofDrawRectangle(4, 6, 8, 8);
+    ofPopMatrix();
   }
+
   if( cNote == 2 ) {
   }
+
   if( cNote == 3 ) {
   }
+
   if( cNote == 4 ) {
   }
+
   if( cNote == 5 ) {
   }
 
