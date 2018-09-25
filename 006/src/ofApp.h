@@ -37,4 +37,6 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
     //-----------------------------
     void star(float x, float y, float z, float w);
     vector <ofVec4f> stars;
+    void star2(float x, float y);
+    vector <ofVec2f> stars2;
 };

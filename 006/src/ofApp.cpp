@@ -78,6 +78,12 @@ void ofApp::setup() {
     stars[i].z = ofRandom(0, stripWidth);
     stars[i].w = stars[i].z;
   }
+
+  stars2.resize(20);
+  for(int i=0; i < stars2.size(); i++) {
+    stars2[i].x = ofRandom(0, stripWidth);
+    stars2[i].y = ofRandom(0, rowHeight);
+  }
 }
 
 //--------------------------------------------------------------
@@ -96,6 +102,19 @@ void ofApp::update(){
     }
   }
 
+  if( cNote == 0 ) {
+    for(int i=0; i < stars2.size(); i++) {
+      stars2[i].x = stars2[i].x + .1;
+      stars2[i].y = stars2[i].y + .5;
+
+      if(stars2[i].y > 16) {
+        stars2[i].x = ofRandom(0, 16);
+        stars2[i].y = ofRandom(0, -4);
+      }
+    }
+  }
+
+  temp++;
   teensy.update();                            // update our serial to teensy stuff
 }
 
@@ -111,8 +130,17 @@ void ofApp::draw(){
   ofTranslate(-8, -8);
 
   if( cNote == 0 ) {
+    float qq = ofMap(sin(temp/142.0f), -1, 1, -4, 3);
+
+    for(int i=0; i < stars2.size(); i++) {
+      star2(stars2[i].x, stars2[i].y);
+    }
+
     ofSetColor(32, 32, 168);
     ofDrawCircle(4, 4, 4);
+
+    ofSetColor(0);
+    ofDrawCircle(qq, 4, 4);
   }
   if( cNote == 1 ) {
   }
@@ -162,6 +190,12 @@ void ofApp::star(float x, float y, float z, float w) {
   float sy = ofMap(y / z, 0, 1, 0, rowHeight);
   float r = ofMap(z, 0, ofGetWidth(), 2, 0);
   ofDrawCircle(sx, sy, r);
+}
+
+void ofApp::star2(float x, float y) {
+  ofSetColor(128,128,128);
+
+  ofDrawCircle(x, y, 1);
 }
 
 //--------------------------------------------------------------
