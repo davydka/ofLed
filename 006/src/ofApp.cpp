@@ -284,7 +284,7 @@ void ofApp::draw(){
     float x3 = 16;
     float y3 = 8;
 
-    ofSetColor(48, aa/2.0f, dd);
+    ofSetColor(32, aa/2.0f, dd);
     ofDrawCircle(8,8, ww);
 
     ofPushMatrix();
