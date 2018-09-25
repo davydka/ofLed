@@ -130,7 +130,7 @@ void ofApp::draw(){
   ofTranslate(-8, -8);
 
   if( cNote == 0 ) {
-    float qq = ofMap(sin(temp/150.0f), -1, 1, -4, 3);
+    float qq = ofMap(sin(temp/138.0f), -1, 1, -4, 3);
 
     for(int i=0; i < stars2.size(); i++) {
       ofSetColor(108,108,108);
