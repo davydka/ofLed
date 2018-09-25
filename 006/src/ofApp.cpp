@@ -133,8 +133,8 @@ void ofApp::draw(){
     float qq = ofMap(sin(temp/150.0f), -1, 1, -4, 3);
 
     for(int i=0; i < stars2.size(); i++) {
-      ofSetColor(128,128,128);
-      ofDrawCircle(x, y, 1);
+      ofSetColor(108,108,108);
+      ofDrawCircle(stars2[i].x, stars2[i].y, 1);
     }
 
     ofSetColor(32, 32, 168);
@@ -191,9 +191,6 @@ void ofApp::star(float x, float y, float z, float w) {
   float sy = ofMap(y / z, 0, 1, 0, rowHeight);
   float r = ofMap(z, 0, ofGetWidth(), 2, 0);
   ofDrawCircle(sx, sy, r);
-}
-
-void ofApp::star2(float x, float y) {
 }
 
 //--------------------------------------------------------------
