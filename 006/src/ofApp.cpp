@@ -130,10 +130,11 @@ void ofApp::draw(){
   ofTranslate(-8, -8);
 
   if( cNote == 0 ) {
-    float qq = ofMap(sin(temp/142.0f), -1, 1, -4, 3);
+    float qq = ofMap(sin(temp/150.0f), -1, 1, -4, 3);
 
     for(int i=0; i < stars2.size(); i++) {
-      star2(stars2[i].x, stars2[i].y);
+      ofSetColor(128,128,128);
+      ofDrawCircle(x, y, 1);
     }
 
     ofSetColor(32, 32, 168);
@@ -193,9 +194,6 @@ void ofApp::star(float x, float y, float z, float w) {
 }
 
 void ofApp::star2(float x, float y) {
-  ofSetColor(128,128,128);
-
-  ofDrawCircle(x, y, 1);
 }
 
 //--------------------------------------------------------------
