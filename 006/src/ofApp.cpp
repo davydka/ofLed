@@ -271,7 +271,7 @@ void ofApp::draw(){
 
   if( cNote == 4 ) {
     float qq = ofMap(sin(temp/236.0f), -1, 1, 0, 360);
-    float ww = ofMap(sin(temp/59.0f), -1, 1, 1, 16);
+    float ww = ofMap(sin(temp/74.0f), -1, 1, 1, 16);
 
     float x0 = 0;
     float y0 = 8;
