@@ -6,7 +6,7 @@ string ROT;
 string FLIP;
 int indexInt = 0;
 int rot = 0;
-int cNote = 3; // current note
+int cNote = 4; // current note
 int flip = 0;
 float temp = 0;
 
@@ -251,20 +251,6 @@ void ofApp::draw(){
     float x2 = 12;
     float y2 = 8+8*sin(temp/14.0f);
 
-    /*
-    float x1 = 4+2*cos(temp*1.0f);
-    float y1 = 8+2*sin(temp/3.5f);
-    float x2 = 12+2*cos(temp*2.0f);
-    float y2 = 8+2*sin(temp);
-    */
-
-    /*
-    float x1 = 4+2*cos(ofGetElapsedTimef()*1.0f);
-    float y1 = 8+2*sin(ofGetElapsedTimef()/3.5f);
-    float x2 = 12+2*cos(ofGetElapsedTimef()*2.0f);
-    float y2 = 8+2*sin(ofGetElapsedTimef());
-    */
-
     float x3 = 16;
     float y3 = 8;
 
@@ -284,6 +270,36 @@ void ofApp::draw(){
   }
 
   if( cNote == 4 ) {
+    float qq = ofMap(sin(temp/236.0f), -1, 1, 0, 360);
+    float ww = ofMap(sin(temp/118.0f), -1, 1, 1, 16);
+
+    float x0 = 0;
+    float y0 = 8;
+
+    float x1 = 4;
+    float y1 = 8+8*sin(temp/42.0f);
+    float x2 = 12;
+    float y2 = 8+8*sin(temp/28.0f);
+
+    float x3 = 16;
+    float y3 = 8;
+
+    ofSetColor(64, aa, dd);
+    ofDrawCircle(8,8, ww);
+
+    ofPushMatrix();
+      ofTranslate(8, 8);
+      ofRotateZDeg(qq);
+      ofTranslate(-8, -8);
+
+      ofFill();
+      ofSetColor(255, 64, dd);
+      ofBeginShape();
+      ofVertex(x0,y0);
+      ofBezierVertex(x1,y1,x2,y2,x3,y3);
+      ofEndShape();
+      ofDrawLine(0,8,19,8);
+    ofPopMatrix();
   }
 
   if( cNote == 5 ) {
