@@ -162,6 +162,19 @@ void ofApp::draw(){
     }
   }
 
+  if( cNote != 100) {
+    if(indexInt == 3) {
+      ofSetColor(0, 0, 0);
+
+      ofDrawRectangle(8, 3, 1, 1);
+      ofDrawRectangle(9, 3, 1, 1);
+    }
+    if(indexInt == 4) {
+      ofSetColor(0, 0, 0);
+      ofDrawRectangle(14, 7, 1, 1);
+    }
+  }
+
   if( cNote == 100 ) {
     ofPushMatrix();
     ofTranslate( stripWidth / 2.f, rowHeight / 2.f );
@@ -207,6 +220,7 @@ void ofApp::handleNote(int note) {
 
   if( cNote != 100 ) {
     videoPlayer.load(vids[ofRandom(0,vids.size())]);
+    handleOpen();
     // videoPlayer.setFrame(0);
   }
 }
