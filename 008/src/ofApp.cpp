@@ -52,7 +52,7 @@ void ofApp::setup() {
   rowHeight = 16;
   stripsPerPort = 1;                          // total number of strips per port
   numPorts = 1;                               // total number of teensy ports?
-  brightness = 32;                             // LED brightness
+  brightness = 255;                             // LED brightness
 
   // setup our teensys
   teensy.setup(stripWidth, stripHeight, rowHeight, stripsPerPort, numPorts);
@@ -286,7 +286,7 @@ void ofApp::applyLUT(ofPixelsRef pix){
 
         for (int k=0; k<3; k++) {
           float amount = (color[k] % 8) / 8.0f;
-          color[k]= (start[k] + amount * (end[k] - start[k])) * 255;
+          color[k]= (start[k] + amount * (end[k] - start[k])) * 32;
         }
 
         lutImg.setColor(x, y, color);
