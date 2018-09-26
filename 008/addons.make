@@ -1,1 +1,2 @@
 ofxTeensyOcto
+ofxMidi

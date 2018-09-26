@@ -11,6 +11,12 @@
 
 ---
 
+* `ffmpeg -i PICT0007.mov -vf scale=128:128,setsar=1:1 00.mp4 -hide_banner`
+* `ffmpeg -i in.mp4 -filter:v "crop=out_w:out_h:x:y" out.mp4`
+* `ffmpeg -i c.mov -filter:v "crop=90:90:0:15" out.mp4`
+
+---
+
 * `npm install` (maybe `npm install --python=python2.7`)
 * note: `/sendmidi/sendmidi-rpi-jessie dev "port 0" cc 20 5`
 
