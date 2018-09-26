@@ -285,7 +285,7 @@ void ofApp::applyLUT(ofPixelsRef pix){
 
         for (int k=0; k<3; k++) {
           float amount = (color[k] % 8) / 8.0f;
-          color[k]= (start[k] + amount * (end[k] - start[k])) * 32;
+          color[k]= (start[k] + amount * (end[k] - start[k])) * 64;
         }
 
         lutImg.setColor(x, y, color);
