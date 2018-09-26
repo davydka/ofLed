@@ -52,7 +52,7 @@ void ofApp::setup() {
   rowHeight = 16;
   stripsPerPort = 1;                          // total number of strips per port
   numPorts = 1;                               // total number of teensy ports?
-  brightness = 255;                             // LED brightness
+  brightness = 192;                             // LED brightness
 
   // setup our teensys
   teensy.setup(stripWidth, stripHeight, rowHeight, stripsPerPort, numPorts);
