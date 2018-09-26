@@ -134,7 +134,6 @@ void ofApp::update(){
         img.setFromPixels(pix);
         img.resize(16,16);
         applyLUT(img.getPixels());
-       /
       }
     }
   }
